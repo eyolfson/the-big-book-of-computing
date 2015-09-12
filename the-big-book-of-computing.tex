@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{fontspec}
 \usepackage[margin=2.54cm, paper=letterpaper]{geometry}
+\usepackage[newfloat]{minted}
 \usepackage{tikz}
 
 \setmainfont{Tinos}
@@ -58,9 +59,11 @@
 
   \chapter{Encodings}
 
-  \section{Character}
+  First rule: everything in computing is a number.
 
   \newpage
+  \section{Character}
+
   \subsection{ASCII}
 
   {\ttfamily\begin{tabular}{c c}
@@ -215,6 +218,7 @@
     127 & \colorbox{gray}{DEL} \\
   \end{tabular}}
 
+  \newpage
   \section{Data}
 
   \subsection{Base64}
@@ -296,6 +300,60 @@
     62 & + \\
     63 & / \\
   \end{tabular}}
+
+  \chapter{Programming Languages}
+
+  \section{Assembly}
+
+  \subsection{x86\_64}
+
+  \begin{listing}[H]
+    \inputminted[frame=lines]{asm}{code/hello_world.asm}
+    \caption{``Hello world'' program written in x86\_64 assembly for Linux}
+    \label{lst:hello-world-asm}
+  \end{listing}
+
+  Assuming the file is called ``\mintinline{console}{hello_world.asm}'' we need
+  to compile to machine code using
+  \mintinline{console}{nasm -f elf64 hello_world.asm}. This produces a file
+  named ``\mintinline{console}{hello_world.o}'' which is an object file (more
+  later). To produce an executable file that will run on the machine use
+  \mintinline{console}{ld hello_world.o -o hello_world}. This produces an
+  executable named ``\mintinline{console}{hello_world}''. Running the program
+  using \mintinline{console}{./hello_world} produces the output
+  ``\mintinline{console}{Hello world!}''.
+
+  x86\_64 has 16 general purpose registers: \mintinline{asm}{rax},
+  \mintinline{asm}{rbx}, \mintinline{asm}{rcx}, \mintinline{asm}{rdx},
+  \mintinline{asm}{rbp}, \mintinline{asm}{rsi}, \mintinline{asm}{rdi},
+  \mintinline{asm}{rsp}, \mintinline{asm}{r8}, \mintinline{asm}{r9},
+  \mintinline{asm}{r10}, \mintinline{asm}{r11}, \mintinline{asm}{r12},
+  \mintinline{asm}{r13}, \mintinline{asm}{r14}, and \mintinline{asm}{r15}. The
+  stack pointer is \mintinline{asm}{rsp} and it is always(?) in use.
+
+  Note that the system call number goes in register \mintinline{asm}{rax}. Note
+  that (on x86\_64) the system call number for \mintinline{asm}{write} is
+  \texttt{1} and for \mintinline{asm}{exit_group} is \texttt{231}. The arguments
+  to the system call go in registers according to the following table:
+
+  {\ttfamily\begin{tabular}{c c}
+    \hline
+    Index & Register \\
+    \hline
+    0 & \mintinline{asm}{rdi} \\
+    1 & \mintinline{asm}{rsi} \\
+    2 & \mintinline{asm}{rdx} \\
+    3 & \mintinline{asm}{r10} \\
+    4 & \mintinline{asm}{r8} \\
+    5 & \mintinline{asm}{r9} \\
+  \end{tabular}}
+
+  In C, \mintinline{asm}{rcx} is used instead of \mintinline{asm}{r10} for
+  the argument at index 3. The kernel destroys registers in
+  \mintinline{asm}{rcx} and \mintinline{asm}{r11}. Registers
+  \mintinline{asm}{rbp}, \mintinline{asm}{rbx}, \mintinline{asm}{r12},
+  \mintinline{asm}{r13}, \mintinline{asm}{r14}, and \mintinline{asm}{r15} belong
+  to the calling function and are untouched by the kernel.
 
   \chapter{Information Theory}
 
