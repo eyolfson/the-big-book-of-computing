@@ -355,6 +355,45 @@
   \mintinline{asm}{r13}, \mintinline{asm}{r14}, and \mintinline{asm}{r15} belong
   to the calling function and are untouched by the kernel.
 
+  \chapter{Programming}
+
+  \section{Parallelism}
+
+  \subsection{Limitations}
+
+  \subsubsection{Amdahl's Law}
+
+  Let $N$ be the number of parallel executions.
+
+  \noindent Let $S$ be the fraction of serial runtime for a serial execution.
+
+  \noindent Let $P$ be the fraction of parallel runtime for a serial execution.
+
+  \vspace{1em}
+
+  $\text{speedup} = \frac{1}{S + \frac{P}{N}}$
+
+  \subsubsection{Gustafson's Law}
+
+  Let $N$ be the number of parallel executions.
+
+  \noindent Let $n$ be a measure of the problem size.
+
+  \noindent Let $S(n)$ be the fraction of serial runtime for a parallel
+  execution.
+
+  \noindent Let $P(n)$ be the fraction of parallel runtime for a parallel
+  execution.
+
+  \vspace{1em}
+
+  $\text{speedup} = S(n) + N \cdot P(n)$
+
+  \chapter{Linux Kernel}
+
+  Include memory allocation declarations with
+  \mintinline{c}{#include <linux/slab.h>}.
+
   \chapter{Information Theory}
 
   \section{Hamming Distance}
