@@ -113,10 +113,14 @@
 
   First rule: everything in computing is a number.
 
-  \newpage
   \section{Integers}
 
-  The most popular integer encoding is \textbf{two's complement}.
+  The most popular integer encoding is \textbf{two's complement}. The sign is
+  encoded in the \textbf{most significant bit (MSB)}. A value of 0 indicates the
+  number is positive and the value is the same as the natural number value of
+  the remaining bits. A value of 1 indicates the number is negative and the
+  value is obtained from negating all the bits, adding one, and taking the value
+  as the natural number value of all the bits.
 
   \newpage
   \section{Character}
