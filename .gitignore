@@ -1,5 +1,5 @@
-/*
-!/.gitignore
-!/LICENSE.txt
-!/the-big-book-of-computing.tex
-!/code/
+/_minted-*
+*.aux
+*.log
+*.pdf
+*.toc
