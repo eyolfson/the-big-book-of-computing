@@ -1,0 +1,47 @@
+\chapter{Booleans}
+
+\section{Algebra}
+
+\subsection{Basics}
+
+There are 3 basic operations: \textbf{and}, \textbf{or}, and \textbf{not}. These
+3 operations may go by their fancier names: \textbf{conjunction},
+\textbf{disjunction}, and \textbf{negation}. The mathematical shorthand for
+these 3 operations are: $\land$, $\lor$, and $\lnot$.
+
+The first 2 operations take two booleans and produce another boolean value
+(similar to addition for numbers). Since the value of a boolean can only be 0 or
+1, we can enumerate all the different possibilities for these operations.  This
+is shown in a truth table below:
+
+\begin{center}
+  \begin{tabular}{r r | r | r}
+    $x$ & $y$ & $\land$ & $\lor$ \\
+    \hline
+    0 &   0 &       0 &      0 \\
+    0 &   1 &       0 &      1 \\
+    1 &   0 &       0 &      1 \\
+    1 &   1 &       1 &      1 \\
+  \end{tabular}
+\end{center}
+
+The last operation, \textbf{not}, takes one boolean value and changes its
+value. So, $\lnot 0 = 1$ and $\lnot 1 = 0$.
+
+\subsection{Derived}
+
+There are 3 dervied operations: \textbf{equivalence}, \textbf{exclusive or
+(xor)}, and \textbf{material implication}. The mathematical shorthand for these
+3 operations are: $\equiv$, $\oplus$, and $\to$. Their truth table is shown
+below:
+
+\begin{center}
+  \begin{tabular}{r r | r | r | r}
+    $x$ & $y$ & $\equiv$ & $\oplus$ & $\to$ \\
+    \hline
+    0 &   0 &        1 &        0 &     1 \\
+    0 &   1 &        0 &        1 &     0 \\
+    1 &   0 &        0 &        1 &     1 \\
+    1 &   1 &        1 &        0 &     1 \\
+  \end{tabular}
+\end{center}
