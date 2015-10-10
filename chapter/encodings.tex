@@ -1,8 +1,22 @@
 \chapter{Encodings}
 
-First rule: everything in computing is a number.
+First rule: everything in computing is a number. Everything boils down to a
+sequence of booleans. When talking about booleans stored on a computer we use
+the synonym bit instead. A bit is short for binary digit, which is either 0 or
+1. The smallest unit stored on a computer is typically 8 bits, this unit is
+called a byte.
 
-\section{Integers}
+\section{Numbers}
+
+Unlike in pure mathematics where we can write numbers up to infinity we are
+constrained by bytes on a computer.
+
+\subsection{Naturals}
+
+The values here are exactly like the binary numeral system in
+\textbf{Section~\ref{sec:numeral-system-binary}}.
+
+\subsection{Integers}
 
 The most popular integer encoding is \textbf{two's complement}. The sign is
 encoded in the \textbf{most significant bit (MSB)}. A value of 0 indicates the
