@@ -3,40 +3,8 @@
 First rule: everything in computing is a number. Everything boils down to a
 sequence of booleans. When talking about booleans stored on a computer we use
 the synonym bit instead. A bit is short for binary digit, which is either 0 or
-1. The smallest unit stored on a computer is typically 8 bits, this unit is
-called a byte.
-
-Processors understand bytes in groups of different sizes. The representation of
-this grouping is different on various processors. When we're using this data, we
-understand it fully as a group and don't break it up into different parts. We
-consider these groups to be \textbf{fundamental}. We would naturally understand
-a group of bytes with the most significant byte written to the left writing the
-next least significant byte to the right. For instance, a 4 byte fundamental is
-shown below with the least significant byte being 0-indexed.
-
-\begin{center}
-\begin{tikzpicture}
-  \node (b3) {\ttfamily 00000011};
-  \draw[decorate,decoration={amplitude=3mm,brace,mirror}]
-    (b3.south west) -- (b3.south east);
-  \node[below of=b3,anchor=center]{$B_3$};
-
-  \node[right of=b3,node distance=2.5cm] (b2) {\ttfamily 00000010};
-  \draw[decorate,decoration={amplitude=3mm,brace,mirror}]
-    (b2.south west) -- (b2.south east);
-  \node[below of=b2,anchor=center]{$B_2$};
-
-  \node[right of=b2,node distance=2.5cm] (b1) {\ttfamily 00000001};
-  \draw[decorate,decoration={amplitude=3mm,brace,mirror}]
-    (b1.south west) -- (b1.south east);
-  \node[below of=b1,anchor=center]{$B_1$};
-
-  \node[right of=b1,node distance=2.5cm] (b0) {\ttfamily 00000000};
-  \draw[decorate,decoration={amplitude=3mm,brace,mirror}]
-    (b0.south west) -- (b0.south east);
-  \node[below of=b0,anchor=center]{$B_0$};
-\end{tikzpicture}
-\end{center}
+1. The smallest unit stored on a computer is typically 8 bits (8 b), this unit
+is called a byte (1 B).
 
 \section{Numbers}
 
