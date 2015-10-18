@@ -1,24 +1,73 @@
 \chapter{Mathematical Basics}
 
-Understand the following terminology: commutativity, and associativity.
+This chapter adapts the basics you've likely learned in elementary school to a
+format that's essential for understanding computing. Computers are one of the
+dumbest machines in the world: they don't do anything unless you tell them to,
+and they only understand two numbers. If you think computers are smart and
+magical, you'll quickly learn otherwise.
 
 \section{Numeral Systems}
 
+We have a good understanding how to read and write numbers intuitively since
+they're ubiquitous in our day-to-day life. To understand the basics of computing
+we'll have to come at it from a slightly different viewpoint. Again, computers
+are dumb and we'll have to learn to speak their language. We'll start with an
+overview of how we, the smart ones, deal with numbers.
+
 \subsection{Decimal}
 
-The number system you're use to is base 10. A number such as 101 can be broken
-down by looking at the value associated with every digit. The numeral system
-we're all familiar with is base 10. We start by associating the last digit with
-the value 1 ($10^0$) and increase this value by a factor of 10 for each digit
-as we work from right to left. We can break down 101 in the following chart:
+The number system we're all use to is decimal, or base 10. If we really break it
+down, a number is just a sequence of digits where each digit is one of 10 values
+(0 to 9). When we write a number that has more than one digit, we understand the
+value of each digit based on where it is in the number. Let's really break it
+down.
+
+A number such as 321 can be broken down by looking at the value associated with
+every digit. Starting at the rightmost digit, we associate that digit with the
+number of 1s in the number. For the next digit, we associate with the number of
+10s in the number. Finally, for the leftmost digit in this number, it's
+associated with the number of 100s.
+
+So, starting with the rightmost digit, with the association to the number of 1s,
+we increase the meaning of the digit to the left by a factor of 10. Of course,
+this is where the 10 in base 10 is from. We have 10 digits to choose from and
+each digit in a number is associated with a factor of 10. Using exponents we can
+write the asssociated number, starting with the rightmost, as $10^0$, then
+increase the exponent everytime we move left: $10^1$, $10^2$, and so on.
+
+We can explicitly chart the values of each digit. In the first row is the value
+of each of the digits and below of value is the digit in our number itself. The
+chart for $321$ is as follows:
 
 \begin{center}
   \begin{tabular}{r | r | r}
     $10^2$ & $10^1$ & $10^0$ \\
     \hline
-         1 &      0 &      1 \\
+         3 &      2 &      1 \\
   \end{tabular}
 \end{center}
+
+To get the value of the number, we multiple the value of the digit by the value
+of the column it's in. This means we'd do the following calculation:
+
+\begin{center}
+  \begin{math}
+    \begin{aligned}
+&= 10^2 \times 3 + 10^1 \times 2 + 10^0 \times 1 \\
+&= 300 + 20 + 1 \\
+&= 321 \\
+    \end{aligned}
+  \end{math}
+\end{center}
+
+The notation, if we want to be explicit about the base of the digits, is to
+write it in subscript. So, $321$ would be $(321)_{10}$. Since we all understand
+decimal however, it's always omitted.
+
+Now, this isn't very useful since we got back the exact same number we wrote.
+Again, that's because we already understand decimal numbers. Unfortunately
+computers aren't as gifted as us. We'll be using this technique to convert
+numbers understood by computers into something we can understand.
 
 \label{sec:numeral-system-binary}
 \subsection{Binary}
@@ -32,13 +81,15 @@ as we work from right to left. We can break down 101 in the following chart:
 
   \vspace{1em}
 
-  $= 2^2 \times 1 + 2^1 \times 0 + 2^0 \times 1 = 4 \times 1 + 1 \times 1 = 5
-   = (101)_2$
+  \begin{math}
+    \begin{aligned}
+&= 2^2 \times 1 + 2^1 \times 0 + 2^0 \times 1 \\
+&= 4 + 0 + 1 \\
+&= 5 \\
+&= (101)_2 \\
+    \end{aligned}
+  \end{math}
 \end{center}
-
-\subsection{Octal}
-
-This is the same as before, except now it's base 8.
 
 \subsection{Hexadecimal}
 
@@ -57,3 +108,7 @@ Same as binary and octal, except instead of base 2 you use base 16.
 \end{tabular}
 
 For instance: $95 = (5\text{F})_{16}$.
+
+\section{Terminology}
+
+Understand the following terminology: commutativity, and associativity.
