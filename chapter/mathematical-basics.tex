@@ -78,15 +78,30 @@ numbers understood by computers into something we can understand.
 \label{sec:numeral-system-binary}
 \subsection{Binary}
 
+Computers only understand 2 states, and you can think of them however you want:
+on and off, true and false, up and down, or 1 and 0. If we think of them as 1
+and 0, we can express numbers, the same as before in base 10, only now in base
+2. Instead of writing a series of digits between 0-9, we write a series of bits
+(binary digits) between 0-1.
+
+Take the number $(101)_2$ for instance, we do the same thing as we did for
+decimal numbers: the rightmost bit has the value of 2 (the base) to the power
+of 0, and then we increase the exponent by 1 to get the value of the next bit
+to the left. In this case, we'd get the following chart:
+
 \begin{center}
   \begin{tabular}{r | r | r}
     $2^2$ & $2^1$ & $2^0$ \\
     \hline
         1 &      0 &      1 \\
   \end{tabular}
+\end{center}
 
-  \vspace{1em}
+Now, unlikely in base 10, we can't really understand the number directly without
+actually doing the multiplication and addition. To get the number to the
+decimal form we understand, just crunch the numbers:
 
+\begin{center}
   \begin{math}
     \begin{aligned}
 &= 2^2 \times 1 + 2^1 \times 0 + 2^0 \times 1 \\
@@ -97,13 +112,71 @@ numbers understood by computers into something we can understand.
   \end{math}
 \end{center}
 
+So, when we see the binary number 101, we can understand this to be the same as
+if we wrote 5. To convert a decimal number to binary, we can carry out long
+division by the base, and write the reminder as the rightmost digit and the
+reminder of the next divison as the digit to the left and so on. To convert 5
+back to binary, we'd do the following:
+
+\begin{center}
+  \begin{math}
+    \begin{aligned}
+5/2 &= 2 Reminder 1 \\
+2/2 &= 1 Reminder 0 \\
+1/2 &= 0 Reminder 1 \\
+    \end{aligned}
+  \end{math}
+\end{center}
+
+Giving $(101)_2$. For practice, consider doing this again for 10:
+
+\begin{center}
+  \begin{math}
+    \begin{aligned}
+10/2 &= 5 Reminder 0 \\
+5/2 &= 2 Reminder 1 \\
+2/2 &= 1 Reminder 0 \\
+1/2 &= 0 Reminder 1 \\
+    \end{aligned}
+  \end{math}
+\end{center}
+
+So, 10 would be $(1010)_2$ in binary. We can use the chart as before to verify
+we're correct:
+
+\begin{center}
+  \begin{tabular}{r | r | r | r}
+    $2^3$ & $2^2$ & $2^1$ & $2^0$ \\
+    \hline
+        1 &     0 &    1  &     0 \\
+  \end{tabular}
+\end{center}
+
+Again, just crunch the numbers:
+
+\begin{center}
+  \begin{math}
+    \begin{aligned}
+&= 2^3 \times 1 + 2^2 \times 0 + 2^1 \times 1 + 2^0 \times 0 \\
+&= 8 + 2 \\
+&= 10 \\
+&= (1010)_2 \\
+    \end{aligned}
+  \end{math}
+\end{center}
+
 \subsection{Hexadecimal}
 
-Same as binary and octal, except instead of base 2 you use base 16.
+The same lessons apply to hexidecimal numbers, that apply to decimal and binary
+numbers, just this time we have 16 options for a single digit. Since we're
+using a larger base then we're use to, we have to use more than all the possible
+digits we're use to for a single hex digit. So, for the digits with a value
+above 9, we use the beginning letters of the alphabet to represent them,
+starting at A to represent 10. The full table of their meanings is below:
 
 \begin{tabular}{c c}
   \hline
-  Value & Equivalent \\
+  Value & Hex Digit \\
   \hline
   10 & $(\text{A})_{16}$ \\
   11 & $(\text{B})_{16}$ \\
@@ -113,7 +186,40 @@ Same as binary and octal, except instead of base 2 you use base 16.
   15 & $(\text{F})_{16}$ \\
 \end{tabular}
 
-For instance: $95 = (5\text{F})_{16}$.
+Now, let's do the exact same procedure to find the decimal value of the
+hexadecimal number $(5\text{F})_{16}$. Here's our familiar chart:
+
+\begin{center}
+  \begin{tabular}{r | r}
+    $16^1$ & $16^0$ \\
+    \hline
+        5  &      F \\
+  \end{tabular}
+\end{center}
+
+Crunching the numbers again:
+
+\begin{center}
+  \begin{math}
+    \begin{aligned}
+&= 16^1 \times 5 + 16^0 \times 15 \\
+&= 80 + 15 \\
+&= 95 \\
+&= (5\text{F})_{16} \\
+    \end{aligned}
+  \end{math}
+\end{center}
+
+We can similarily take a decimal number and convert it to hexidecimal by doing
+the long division technique again.
+
+There's a nice property hexidecimal numbers have when you have to deal with
+binary: you can save a lot of space by writing binary numbers as their
+hexadecimal equivalents since one hexadecimal digit can be represented as a 4
+bit number. For instance, $(5)_{16}$ is $(101)_2$ in binary and
+$(\text{F})_{16}$ is $(1111)_2$ in binary. Instead of doing a long conversion to
+binary, we can just write their hexadecimal to binary equivalents. This would
+give us the binary number $(1011111)_2$ which is equal to $95$.
 
 \section{Terminology}
 
