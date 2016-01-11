@@ -4,11 +4,11 @@
 % International License. You should have received a copy of the license along
 % with this work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
 
-\documentclass[12pt]{book}
+\documentclass[10pt]{book}
 
 \usepackage{amsmath}
 \usepackage{fontspec}
-\usepackage[margin=2.54cm, paper=letterpaper]{geometry}
+\usepackage[a5paper, margin=2cm]{geometry}
 \usepackage[newfloat]{minted}
 \usepackage{tikz}
 
@@ -28,11 +28,11 @@
     \begin{tikzpicture}[remember picture, overlay]
       \draw[draw=none, fill=solarizedBase03]
         (current page.north west) rectangle (current page.south east);
-      \node[color=solarizedBlue, text width=5em, text centered, scale=9]
+      \node[color=solarizedBlue, text width=1.75cm, text centered, scale=8]
         (title) at (current page.center) {\texttt{The Big Book of Computing}};
-      \node[anchor=south west, inner sep=5mm, color=solarizedBase0, scale=2]
+      \node[anchor=south west, inner sep=4mm, color=solarizedBase0, scale=2]
         at (current page.south west) {\textsf{0.0.1-development}};
-      \node[anchor=south east, inner sep=5mm, color=solarizedBase0, scale=2]
+      \node[anchor=south east, inner sep=4mm, color=solarizedBase0, scale=2]
         at (current page.south east) {\textsf{Jonathan Eyolfson}};
     \end{tikzpicture}
   \end{titlepage}
@@ -44,40 +44,7 @@
   \include{chapter/encodings}
   \include{chapter/file-formats}
   \include{chapter/instruction-set-architecture}
-
-  \chapter{Programming}
-
-  \section{Parallelism}
-
-  \subsection{Limitations}
-
-  \subsubsection{Amdahl's Law}
-
-  Let $N$ be the number of parallel executions.
-
-  \noindent Let $S$ be the fraction of serial runtime for a serial execution.
-
-  \noindent Let $P$ be the fraction of parallel runtime for a serial execution.
-
-  \vspace{1em}
-
-  $\text{speedup} = \frac{1}{S + \frac{P}{N}}$
-
-  \subsubsection{Gustafson's Law}
-
-  Let $N$ be the number of parallel executions.
-
-  \noindent Let $n$ be a measure of the problem size.
-
-  \noindent Let $S(n)$ be the fraction of serial runtime for a parallel
-  execution.
-
-  \noindent Let $P(n)$ be the fraction of parallel runtime for a parallel
-  execution.
-
-  \vspace{1em}
-
-  $\text{speedup} = S(n) + N \cdot P(n)$
+  \include{chapter/parallelism}
 
   \chapter{Linux Kernel}
 

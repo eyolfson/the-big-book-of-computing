@@ -1,0 +1,31 @@
+\chapter{Parallelism}
+
+\section{Limitations}
+
+\subsection{Amdahl's Law}
+
+Let $N$ be the number of parallel executions.
+
+\noindent Let $S$ be the fraction of serial runtime for a serial execution.
+
+\noindent Let $P$ be the fraction of parallel runtime for a serial execution.
+
+\vspace{1em}
+
+$\text{speedup} = \frac{1}{S + \frac{P}{N}}$
+
+\subsection{Gustafson's Law}
+
+Let $N$ be the number of parallel executions.
+
+\noindent Let $n$ be a measure of the problem size.
+
+\noindent Let $S(n)$ be the fraction of serial runtime for a parallel
+execution.
+
+\noindent Let $P(n)$ be the fraction of parallel runtime for a parallel
+execution.
+
+\vspace{1em}
+
+$\text{speedup} = S(n) + N \cdot P(n)$

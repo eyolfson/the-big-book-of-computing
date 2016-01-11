@@ -48,7 +48,7 @@ Assuming the file is called ``\mintinline{console}{hello_world.asm}'' we need to
 compile to machine code using \mintinline{console}{nasm -f elf64
   hello_world.asm}. This produces a file named
 ``\mintinline{console}{hello_world.o}'' which is an object file (more later). To
-produce an executable file that will run on the machine use
+produce an executable file that will run on the machine use the standard linker:
 \mintinline{console}{ld hello_world.o -o hello_world}. This produces an
 executable named ``\mintinline{console}{hello_world}''. Running the program
 using \mintinline{console}{./hello_world} produces the output
