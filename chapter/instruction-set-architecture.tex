@@ -36,11 +36,11 @@ byte word is shown below with the least significant byte being 0-indexed.
 
 Currently, the plan is to initially make this secton specifically for ARMv7.
 
-\section{x86\_64}
+\section{x86-64}
 
 \begin{listing}[H]
   \inputminted[frame=lines]{asm}{code/hello_world.asm}
-  \caption{``Hello world'' program written in x86\_64 assembly for Linux}
+  \caption{``Hello world'' program written in x86-64 assembly for Linux}
   \label{lst:hello-world-asm}
 \end{listing}
 
@@ -54,7 +54,7 @@ executable named ``\mintinline{console}{hello_world}''. Running the program
 using \mintinline{console}{./hello_world} produces the output
 ``\mintinline{console}{Hello world!}''.
 
-x86\_64 has 16 general purpose registers: \mintinline{asm}{rax},
+x86-64 has 16 general purpose registers: \mintinline{asm}{rax},
 \mintinline{asm}{rbx}, \mintinline{asm}{rcx}, \mintinline{asm}{rdx},
 \mintinline{asm}{rbp}, \mintinline{asm}{rsi}, \mintinline{asm}{rdi},
 \mintinline{asm}{rsp}, \mintinline{asm}{r8}, \mintinline{asm}{r9},
@@ -63,7 +63,7 @@ x86\_64 has 16 general purpose registers: \mintinline{asm}{rax},
 stack pointer is \mintinline{asm}{rsp} and it is always(?) in use.
 
 Note that the system call number goes in register \mintinline{asm}{rax}. Note
-that (on x86\_64) the system call number for \mintinline{asm}{write} is
+that (on x86-64) the system call number for \mintinline{asm}{write} is
 \texttt{1} and for \mintinline{asm}{exit_group} is \texttt{231}. The arguments
 to the system call go in registers according to the following table:
 
