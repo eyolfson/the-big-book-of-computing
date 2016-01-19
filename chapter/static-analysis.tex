@@ -1,5 +1,21 @@
 \chapter{Static Analysis}
 
+\section{Control Flow Graph (CFG)}
+
+\begin{tikzpicture}[->,>=stealth']
+  \node (1) {1};
+  \node (2) [below of=1] {2};
+  \node (3) [below of=2] {3};
+  \node (4) [below of=3, xshift=-5mm] {4};
+  \node (5) [right of=4] {5};
+
+  \path (1) edge (2)
+        (2) edge (3)
+        (3) edge (4)
+        (4) edge [bend right] (3)
+        (3) edge (5);
+\end{tikzpicture}
+
 \section{Dominator Trees}
 
 \begin{tikzpicture}
