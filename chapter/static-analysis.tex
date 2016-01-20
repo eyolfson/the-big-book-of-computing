@@ -1,16 +1,24 @@
 \chapter{Static Analysis}
 
+\section{Terminology}
+
+\begin{description}
+  \item[Soundness.] Never report a definite results when the opposite is true.
+  \item[Precision.] Reporting a definite result as often as possible.
+  \item[Conservative.] Just report ``maybe'' when in doubt.
+\end{description}
+
 \section{Control Flow Graph (CFG)}
 
 \begin{tikzpicture}[->,>=stealth']
   \node (1) {1};
-  \node (2) [below of=1] {2};
-  \node (3) [below of=2] {3};
+  \node (2) [below of=1, xshift=-5mm] {2};
+  \node (3) [right of=2] {3};
   \node (4) [below of=3, xshift=-5mm] {4};
   \node (5) [right of=4] {5};
 
   \path (1) edge (2)
-        (2) edge (3)
+        (1) edge (3)
         (3) edge (4)
         (4) edge [bend right] (3)
         (3) edge (5);
