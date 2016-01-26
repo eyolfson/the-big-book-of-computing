@@ -2,4 +2,16 @@
 
 \section{Lexing}
 
+\begin{tikzpicture}[shorten >=1pt, initial text=]
+  \tikzstyle{every state}=[node distance=2cm, minimum size=1cm]
+  \tikzstyle{accepting}=[double]
+
+  \node[state]                                 (sn)               {$s_n$};
+  \node[state, initial]                        (s0) [right of=sn] {$s_0$};
+  \node[state, accepting, node distance=2.5cm] (s1) [right of=s0] {$s_1$};
+  \node[below of=sn] {State $n$};
+  \node[below of=s0] {Initial state};
+  \node[below of=s1] {Accepting state}; 
+\end{tikzpicture}
+
 \section{Parsing}
