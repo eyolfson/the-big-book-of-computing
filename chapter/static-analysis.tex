@@ -30,6 +30,11 @@ $R$ is transitive iff $R \circ R \subseteq R$.
 
 If $R$ is reflexive, antisymmetric and transitive it is a partial order.
 
+Suppose $R$ is a partial order on a set $A$, $B \subseteq A$, and $b \in B$.
+Then $b$ is called an $R$-smallest element of $B$ (or smallest element of $B$)
+if $\forall x \in B (b R x)$. It is called  an $R$-minimal element (or just a
+minimal element) if $\lnot \exists x \in B (x R b \land x \neq b)$.
+
 \section{Control Flow Graph (CFG)}
 
 \begin{tikzpicture}[->,>=stealth']
