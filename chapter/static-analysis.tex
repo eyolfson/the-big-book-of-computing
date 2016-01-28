@@ -13,6 +13,23 @@
                             reach a fixed point.
 \end{description}
 
+Suppose $R$ is a relation on set $A$.
+
+$R$ is reflexive if $\forall x \in A (x R x)$
+
+$R$ is reflexive iff $i_A \subseteq R$, where $i_A$ is the identity  relation
+on A.
+
+$R$ is antisymmetric if $\forall x \in A \forall y \in A ((x R y \land y R x)
+\rightarrow x = y)$.
+
+$R$ is transitive if $\forall x \in A \forall y \in A \forall z \in A
+((x R y \land y R z) \rightarrow x R z)$.
+
+$R$ is transitive iff $R \circ R \subseteq R$.
+
+If $R$ is reflexive, antisymmetric and transitive it is a partial order.
+
 \section{Control Flow Graph (CFG)}
 
 \begin{tikzpicture}[->,>=stealth']
