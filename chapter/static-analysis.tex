@@ -35,6 +35,17 @@ Then $b$ is called an $R$-smallest element of $B$ (or smallest element of $B$)
 if $\forall x \in B (b R x)$. It is called  an $R$-minimal element (or just a
 minimal element) if $\lnot \exists x \in B (x R b \land x \neq b)$.
 
+Suppose $R$ is a partial order on set $A$, $B \subseteq A$, and $a \in A$ (note
+we consider elements in $A$ instead of $B$ as before). Then $a$ is called a
+lower bound for $B$ if $\forall x \in B (a R x)$. Similarly, it is an upper
+bound for $B$ if $\forall x \in B (x R a)$.
+
+Suppose $R$ is a partial order on set $A$, $B \subseteq A$. Let $U$ be the set
+of all upper bounds for $B$, and let $L$ be the set of all lower bounds. If $U$
+has a smallest element, then this smallest element is called the least upper
+bound of $B$. If $L$ has a largest element, then this largest element is called
+the greatest lower bound of $B$.
+
 \section{Control Flow Graph (CFG)}
 
 \begin{tikzpicture}[->,>=stealth']
