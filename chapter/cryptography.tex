@@ -1,0 +1,41 @@
+\chapter{Cryptography}
+
+\section{Information Theory}
+
+\subsection{Hamming Distance}
+
+A measure of how many characters are different in two strings of equal length.
+
+Example: Consider the two ASCII encoded strings ``this is a test'' and ``wokka
+wokka!!!''. Both have the same length of 14 characters. If each character is
+represented as 8 bits we have to many 112 comparsions ($14 \times 8$).
+
+\texttt{t} is $116 = (74)_{16} = (01110100)_{2}$
+
+\texttt{w} is $119 = (77)_{16} = (01110111)_{2}$
+
+This hamming distance between these two characters is 2.
+
+\texttt{h} is $104 = (68)_{16} = (01101000)_{2}$
+
+\texttt{o} is $111 = (6\text{F})_{16} = (01101111)_{2}$
+
+This hamming distance between these two characters is 3, running total of 5.
+
+\texttt{i} is $105 = (69)_{16} = (01101001)_{2}$
+
+\texttt{k} is $107 = (6\text{B})_{16} = (01101011)_{2}$
+
+This hamming distance between these two characters is 1, running total of 6.
+
+And so on, the hamming distance of these two strings is 37.
+
+\section{Block Ciphers}
+
+\subsection{Modes of Operation}
+
+\subsubsection{Electronic Codebook (ECB)}
+
+\subsubsection{Cipher Block Chaining (CBC)}
+
+\subsubsection{Counter (CTR)}
