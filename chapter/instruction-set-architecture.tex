@@ -38,6 +38,36 @@ Currently, the plan is to initially make this secton specifically for ARMv7.
 
 \section{x86-64}
 
+\begin{center}
+\begin{tikzpicture}
+  \node (r0) {\ttfamily Register 0};
+  \node[right of=r0, anchor=west] {\ttfamily rax};
+
+  \node[below of=r0] (r1) {\ttfamily Register 1};
+  \node[right of=r1, anchor=west] {\ttfamily rcx};
+
+  \node[below of=r1] (r2) {\ttfamily Register 2};
+  \node[right of=r2, anchor=west] {\ttfamily rdx};
+
+  \node[below of=r2] (r3) {\ttfamily Register 3};
+  \node[right of=r3, anchor=west] {\ttfamily rbx};
+
+  \node[below of=r3] (r4) {\ttfamily Register 4};
+  \node[right of=r4, anchor=west] {\ttfamily rsp};
+
+  \node[below of=r4] (r5) {\ttfamily Register 5};
+  \node[right of=r5, anchor=west] {\ttfamily rbp};
+
+  \node[below of=r5] (r6) {\ttfamily Register 6};
+  \node[right of=r6, anchor=west] {\ttfamily rsi};
+
+  \node[below of=r6] (r7) {\ttfamily Register 7};
+  \node[right of=r7, anchor=west] {\ttfamily rdi};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Hello World}
+
 \begin{listing}[H]
   \inputminted[frame=lines]{asm}{code/hello_world.asm}
   \caption{``Hello world'' program written in x86-64 assembly for Linux}
