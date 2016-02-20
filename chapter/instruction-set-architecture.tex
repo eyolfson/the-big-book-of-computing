@@ -34,6 +34,42 @@ byte word is shown below with the least significant byte being 0-indexed.
 
 \section{x86-64}
 
+We only discuss long mode (64-bit).
+
+\subsection{Encoding}
+
+Legacy prefixes
+
+Prefix group 2
+
+$(64)_{16}$ FS segment override
+$(65)_{16}$ GS segment override
+$(2E)_{16}$ Branch not taken
+$(3E)_{16}$ Branch taken
+
+These are not used in long mode.
+$(\texttt{2E})_{16}$ CS segment override
+$(36)_{16}$ SS segment override
+$(3E)_{16}$ DS segment override
+$(26)_{16}$ ES segment override
+
+Opcode with prefixes
+
+ModR/M. Should be Mod.Reg.R/M
+
+SIB
+
+Displacement
+
+Immediate
+
+REX prefix, this prefix has 4 fields: W, R, X, B each are 1 bit. The first 4
+bits of this prefix is $(\texttt{0100})_2$ or $(\texttt{4})_{16}$.
+
+\subsection{Registers}
+
+There are 16 ``general purpose'' 64-bit registers.
+
 \begin{center}
 \begin{tikzpicture}
   \node (r0) {\ttfamily Register 0};
