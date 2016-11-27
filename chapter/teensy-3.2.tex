@@ -3,3 +3,26 @@
 \section{Hardware}
 
 MK20DX256
+
+\begin{description}
+  \item[CPU.] ARM Cortex M4
+  \item[Storage.] 256 K Flash
+  \item[RAM.] 64 K
+  \item[ROM.] 2 K EEPROM
+\end{description}
+
+\begin{description}
+  \item[LP38691.] 500mA Low Dropout CMOS Linear Regulators Stable with Ceramic
+                  Output Capacitors
+  \item[MKL02Z32VFG4.] ARM Cortex-M0+ Kinetis KL02 Microcontroller IC 32-Bit
+                       48MHz 32KB (32K x 8) FLASH 16-QFN (3x3)
+  \item[MK20DX256VLH7.] ARM Cortex-M4 Kinetis K20 Microcontroller IC 32-Bit
+                        72MHz 256KB (256K x 8) FLASH 64-LQFP (10x10)
+\end{description}
+
+The is a secondary CPU containing the \textit{HalfKay bootloader}.
+A special USB packet or pressing the on-board button activates this CPU.
+It uploads the bootloader code to the main RAM and tells the main CPU to
+execute it(?).
+The bootloader clears flash and writes the flash with new code, afterwards it
+reboots itself.
