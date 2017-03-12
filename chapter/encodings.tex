@@ -3,8 +3,13 @@
 First rule: everything in computing is a number. Everything boils down to a
 sequence of booleans. When talking about booleans stored on a computer we use
 the synonym bit instead. A bit is short for binary digit, which is either 0 or
-1. The smallest unit stored on a computer is typically 8 bits (8 b), this unit
-is called a byte (1 B).
+1. The smallest addressable unit stored on a computer is typically 8 bits (8 b),
+this unit is called a byte (1 B).
+
+A bit is the atomic unit that all other data is based on. To represent
+everything we need to in a program, we have to come up with an encoding for the
+data. An encoding is just a way to interpret the numbers so we can understand.
+Of course, for any encoding both parties need to agree on a consistent encoding.
 
 \section{Numbers}
 
@@ -24,6 +29,12 @@ not produce incorrect answers.
 The values here are exactly like the binary numeral system in
 \textbf{Section~\ref{sec:numeral-system-binary}}.
 
+We're restrained to a finite number of bits to represent a number.
+Unlike what we're use to, we have to agree on the number of digits at all times
+and have to write them all.
+For example, if we want to represent 43 as an 8 bit number we need to write
+\binary{00101011}.
+
 \subsection{Integers}
 
 The most popular integer encoding is \textbf{two's complement}. The sign is
@@ -35,6 +46,9 @@ natural number value of all the bits.
 
 \newpage
 \section{Character}
+
+A character is, for the most part, an English symbols. In writing, it's referred
+to as a grapheme.
 
 \subsection{ASCII}
 
@@ -75,7 +89,6 @@ natural number value of all the bits.
    30 & \colorbox{gray}{RS} \\
    31 & \colorbox{gray}{US} \\
 \end{tabular}
-\quad
 \begin{tabular}{c c}
   \hline
   Value & Meaning \\
@@ -113,7 +126,7 @@ natural number value of all the bits.
    62 & > \\
    63 & ? \\
 \end{tabular}
-\quad
+
 \begin{tabular}{c c}
   \hline
   Value & Meaning \\
@@ -151,7 +164,6 @@ natural number value of all the bits.
    94 & \textasciicircum \\
    95 & \_ \\
 \end{tabular}
-\quad
 \begin{tabular}{c c}
   \hline
   Value & Meaning \\
@@ -197,7 +209,7 @@ natural number value of all the bits.
 
 The following is a table of the encoded values:
 
-{\ttfamily\begin{tabular}{c c}
+{\scriptsize\ttfamily\begin{tabular}{c c}
   \hline
   Value & ASCII Character \\
   \hline
@@ -234,7 +246,6 @@ The following is a table of the encoded values:
   30 & e \\
   31 & f \\
 \end{tabular}
-\quad
 \begin{tabular}{c c}
   \hline
   Value & ASCII Character \\
