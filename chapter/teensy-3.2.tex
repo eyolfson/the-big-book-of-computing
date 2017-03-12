@@ -2,7 +2,7 @@
 
 \section{Hardware}
 
-MK20DX256
+System on chip (SoC) is MK20DX256VLH7.
 
 \begin{description}
   \item[CPU.] ARM Cortex M4
@@ -26,3 +26,16 @@ It uploads the bootloader code to the main RAM and tells the main CPU to
 execute it(?).
 The bootloader clears flash and writes the flash with new code, afterwards it
 reboots itself.
+
+PTA18 and PTA19 are connected to a 16 MHz clock.
+
+CPU is at 48 MHz or 48,000,000 times a second.
+
+\texttt{SYST\_RVR} is 47,999 or \hexadecimal{BB7F}.
+Since it counts down to 0, the SysTick interrupt occurs at 1,000 kHz.
+In other words it occurs every ms (millisecond).
+
+\texttt{SYST\_CSR} is \hexadecimal{7}.
+Core clock is used for systick.
+Generates a SysTick interrupt when 0.
+Counter operates in multi-shot manner.
