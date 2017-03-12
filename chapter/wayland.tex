@@ -4,6 +4,12 @@ Wayland is a protocol for graphics and input intended for applications.
 
 \textit{Background knowledge: UNIX domain stream socket.}
 
+\newpage
+
+\section{Objects}
+
+Each object has a set of requests and events.
+
 \begin{tikzpicture}[->,>=stealth',shorten >=0.5mm,grow=right,
                     level distance=2.68cm,sibling distance=1cm]
   \tikzstyle{core} = [draw, rectangle, fill=blue!50]
@@ -63,11 +69,10 @@ Wayland is a protocol for graphics and input intended for applications.
   ;
 \end{tikzpicture}
 
-Requests and events.
+\newpage
+\subsection{wl\_output}
 
-\section{wl\_output}
-
-\subsection{Events}
+\subsubsection{Events}
 
 \paragraph{geometry}
 

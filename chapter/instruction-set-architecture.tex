@@ -8,6 +8,11 @@ naturally understand a group of bytes with the most significant byte written to
 the left writing the next least significant byte to the right. For instance, a 4
 byte word is shown below with the least significant byte being 0-indexed.
 
+Which address is the most significant byte is called the endianness. If the
+first addressable byte is the least significant byte this is little endian.
+Otherwise, if the first addressable byte is the most significant byte this is
+big endian.
+
 \begin{center}
 \begin{tikzpicture}
   \node (b3) {\ttfamily 00000011};
@@ -35,8 +40,17 @@ byte word is shown below with the least significant byte being 0-indexed.
 \section{x86-64}
 
 We only discuss long mode (64-bit).
+This is default mode for \texttt{x86\_64} processors.
+There is 32-bit mode that is \texttt{x86} without any extensions (?) where
+addresses are also 32-bit.
+Another mode is \texttt{x32} which allows 32-bit addresses with the full
+\texttt{x86\_64} instruction set.
 
 \subsection{Encoding}
+
+The main encoding is found in Intel's programming manual. This is a very
+compressed version of the instruction encoding. All instructions start with a
+prefix.
 
 Legacy prefixes
 
@@ -68,35 +82,40 @@ bits of this prefix is $(\texttt{0100})_2$ or $(\texttt{4})_{16}$.
 
 \subsection{Registers}
 
-There are 16 ``general purpose'' 64-bit registers.
+There are 16 ``general purpose'' 64-bit registers. How you address them is shown
+below. All of these names are available in \texttt{x86\_64} mode. The rest of
+them are there for legacy instructions.
 
-\begin{center}
-\begin{tikzpicture}
-  \node (r0) {\ttfamily Register 0};
-  \node[right of=r0, anchor=west] {\ttfamily rax};
+Some registers are dedicated to the stack pointer, and source amnd destination
+addresses.
 
-  \node[below of=r0] (r1) {\ttfamily Register 1};
-  \node[right of=r1, anchor=west] {\ttfamily rcx};
-
-  \node[below of=r1] (r2) {\ttfamily Register 2};
-  \node[right of=r2, anchor=west] {\ttfamily rdx};
-
-  \node[below of=r2] (r3) {\ttfamily Register 3};
-  \node[right of=r3, anchor=west] {\ttfamily rbx};
-
-  \node[below of=r3] (r4) {\ttfamily Register 4};
-  \node[right of=r4, anchor=west] {\ttfamily rsp};
-
-  \node[below of=r4] (r5) {\ttfamily Register 5};
-  \node[right of=r5, anchor=west] {\ttfamily rbp};
-
-  \node[below of=r5] (r6) {\ttfamily Register 6};
-  \node[right of=r6, anchor=west] {\ttfamily rsi};
-
-  \node[below of=r6] (r7) {\ttfamily Register 7};
-  \node[right of=r7, anchor=west] {\ttfamily rdi};
-\end{tikzpicture}
-\end{center}
+% \begin{center}
+% \begin{tikzpicture}
+%   \node (r0) {\ttfamily Register 0};
+%   \node[right of=r0, anchor=west] {\ttfamily rax};
+% 
+%   \node[below of=r0] (r1) {\ttfamily Register 1};
+%   \node[right of=r1, anchor=west] {\ttfamily rcx};
+% 
+%   \node[below of=r1] (r2) {\ttfamily Register 2};
+%   \node[right of=r2, anchor=west] {\ttfamily rdx};
+% 
+%   \node[below of=r2] (r3) {\ttfamily Register 3};
+%   \node[right of=r3, anchor=west] {\ttfamily rbx};
+% 
+%   \node[below of=r3] (r4) {\ttfamily Register 4};
+%   \node[right of=r4, anchor=west] {\ttfamily rsp};
+% 
+%   \node[below of=r4] (r5) {\ttfamily Register 5};
+%   \node[right of=r5, anchor=west] {\ttfamily rbp};
+% 
+%   \node[below of=r5] (r6) {\ttfamily Register 6};
+%   \node[right of=r6, anchor=west] {\ttfamily rsi};
+% 
+%   \node[below of=r6] (r7) {\ttfamily Register 7};
+%   \node[right of=r7, anchor=west] {\ttfamily rdi};
+% \end{tikzpicture}
+% \end{center}
 
 \subsection{Hello World}
 

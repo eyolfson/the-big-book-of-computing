@@ -7,8 +7,8 @@
   \item[Precision.] Reporting a definite result as often as possible.
   \item[Conservative.] Just report ``maybe'' when in doubt.
   \item[Poset.] A partially ordered set.
-  \item[Lattice.] Poset with a least upper bound (join) and greatest lower bound
-                  (meet).
+  \item[Lattice.] Poset with a least upper bound (join operation) and greatest
+                  lower bound (meet operation).
   \item[Dataflow Anaylsis.] Iterate over the CFG with flow equations until you
                             reach a fixed point.
 \end{description}
@@ -46,7 +46,18 @@ has a smallest element, then this smallest element is called the least upper
 bound of $B$. If $L$ has a largest element, then this largest element is called
 the greatest lower bound of $B$.
 
+These are all part of set theory in mathematics. A lot of proofs and theory in
+static analysis relies on a solid understanding over the underlaying
+mathematics.
+
 \section{Control Flow Graph (CFG)}
+
+A CFG shows how program execution occurs. It has an entry edge where execution
+starts. It can have multiple exit edges. Typically in programming languages this
+exit is a return statement.
+
+Consider below, and 1 is the entry node. This diagram has two exit nodes, 2 and
+5. There is a loop in nodes 3 and 4.
 
 \begin{tikzpicture}[->,>=stealth']
   \node (1) {1};
@@ -61,6 +72,9 @@ the greatest lower bound of $B$.
         (4) edge [bend right] (3)
         (3) edge (5);
 \end{tikzpicture}
+
+This easier to see what possible paths the program may take. We may also want to
+know what variables are valid in which blocks.
 
 \section{Dominator Trees}
 
@@ -77,6 +91,8 @@ the greatest lower bound of $B$.
     };
 \end{tikzpicture}
 
-\section{Interprocedural, Finite, Distributive, Subset (IFDS)}
+\section{IFDS}
+
+Interprocedural, Finite, Distributive, Subset (IFDS).
 
 \section{Alias Analysis}
