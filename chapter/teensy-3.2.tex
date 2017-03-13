@@ -65,6 +65,24 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
+\subsection{Execution}
+
+The following is the program flow:
+
+\indent \texttt{ResetHandler (mk20dx128.c)}
+
+\hspace{2mm} \texttt{startup\_early\_hook (mk20dx128.c)}
+
+\hspace{2mm} \texttt{\_init\_Teensyduino\_internal\_ (pins\_teensy.c)}
+
+\hspace{4mm} \texttt{analog\_init (analog.c)}
+
+\hspace{4mm} \texttt{delay(4) (pins\_teensy.c)}
+
+\hspace{4mm} \texttt{usb\_init (usb\_dev.c)}
+
+\subsection{Functions}
+
 \paragraph{\texttt{ResetHandler (mk20dx128.c)}} Reset interrupt handler.
 
 \hexadecimal{00 00 01 BC} is load watchdog address.
@@ -97,15 +115,21 @@ This takes up 1000 bytes.
 
 \hexadecimal{00 00 02 D8} is \texttt{\_\_enable\_irq}.
 
-\paragraph{\texttt{startup\_early\_hook (mk20dx128.c)}} Default, allows updates
-to the watchdog.
+\hexadecimal{00 00 02 DA} call to \texttt{\_init\_Teensyduino\_internal\_}
 
-\hexadecimal{00 00 13 88} is entry point.
+\paragraph{\texttt{??? (???)}} Enables Port A-E IRQs.
 
-\hexadecimal{00 00 13 8E} is \texttt{return}.
+\hexadecimal{00 00 05 08} is entry point.
+
+\hexadecimal{00 00 05 28} is exit point.
 
 \paragraph{\texttt{delay (pins\_teensy.c)}} Delays the processor at least
 specified number of milliseconds.
+
+\hexadecimal{00 00 08 4C} is entry point (push \texttt{R4}, \texttt{R5},
+\texttt{R6}, \texttt{R14}).
+
+\hexadecimal{00 00 08 50} is call to \texttt{micros()} for \texttt{start}.
 
 \hexadecimal{00 00 08 5C} is call to \texttt{micros()} in \texttt{while}.
 
@@ -114,6 +138,17 @@ specified number of milliseconds.
 \hexadecimal{00 00 08 68} is conditional branch to \texttt{return}.
 
 \hexadecimal{00 00 08 74} is \texttt{return} (with \texttt{POP}).
+
+\paragraph{\texttt{\_init\_Teensyduino\_internal\_ (pins\_teensy.c)}}
+Init.
+
+\hexadecimal{00 00 08 78} is entry (push \texttt{R4}, \texttt{R14}).
+
+\hexadecimal{00 00 08 CA} call to \texttt{delay} (4 bytes)
+
+\hexadecimal{00 00 08 CE} return from \texttt{delay} (4 bytes) (pop \texttt{R4},
+\texttt{R5}, \texttt{R6}, \texttt{R14}).
+
 
 \paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
 microseconds.
@@ -136,6 +171,50 @@ microseconds.
 
 \hexadecimal{00 00 10 00} is an immediate return.
 
+\paragraph{\texttt{startup\_early\_hook (mk20dx128.c)}} Default, allows updates
+to the watchdog.
+
+\hexadecimal{00 00 13 88} is entry point.
+
+\hexadecimal{00 00 13 8E} is \texttt{return}.
+
+\paragraph{\texttt{usb\_init (usb\_dev.c)}} Unknown
+
+\hexadecimal{00 00 1C 0C} is entry point.
+
+\paragraph{\texttt{analog\_init (analog.c)}} Unknown
+
+\hexadecimal{00 00 20 9C} is entry point.
+
+\hexadecimal{00 00 21 26} is exit point.
+
+\hexadecimal{00 00 21 28} is \texttt{VREF\_TRM} address (4 bytes).
+
+\hexadecimal{00 00 21 2C} is \texttt{analog\_config\_bits} address (4 bytes).
+
+\hexadecimal{00 00 21 30} is \texttt{ADC0\_CFG1} address (4 bytes).
+
+\hexadecimal{00 00 21 34} is \texttt{ADC0\_CFG2} address (4 bytes).
+
+\hexadecimal{00 00 21 38} is \texttt{ADC1\_CFG1} address (4 bytes).
+
+\hexadecimal{00 00 21 40} is \texttt{analog\_reference\_internal} address
+(4 bytes).
+
+\hexadecimal{00 00 21 44} is \texttt{ADC0\_SC2} address (4 bytes).
+
+\hexadecimal{00 00 21 48} is \texttt{ADC1\_SC2} address (4 bytes).
+
+\hexadecimal{00 00 21 4C} is \texttt{analog\_num\_average} address (4 bytes).
+
+\hexadecimal{00 00 21 50} is \texttt{ADC0\_SC3} address (4 bytes).
+
+\hexadecimal{00 00 21 54} is \texttt{ADC1\_SC3} address (4 bytes).
+
+\hexadecimal{00 00 21 58} is \texttt{calibrating} address (4 bytes).
+
+\textbf{Total: 192 bytes}
+
 \subsection{Variables}
 
 Below are all the variables:
@@ -150,4 +229,35 @@ Below are all the variables:
 
 \hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
 
+\vspace{1em}
+
+\hexadecimal{00 00 08 D8} is \texttt{FTM0\_CNT} address (4 bytes).
+
+\hexadecimal{00 00 08 DC} is \texttt{FTM0\_C0SC} address (4 bytes).
+
+\hexadecimal{00 00 08 E0} is \texttt{FTM0\_SC} address (4 bytes).
+
+\hexadecimal{00 00 08 E4} is \texttt{FTM1\_CNT} address (4 bytes).
+
+\hexadecimal{00 00 08 E8} is \texttt{FTM2\_CNT} address (4 bytes).
+
+\hexadecimal{00 00 08 EC} is \texttt{FTM2\_MOD} address (4 bytes).
+
+\hexadecimal{00 00 08 F0} is \texttt{FTM2\_C0SC} address (4 bytes).
+
+\hexadecimal{00 00 08 F4} is \texttt{FTM2\_SC} address (4 bytes).
+
+\vspace{1em}
+
+\hexadecimal{1F FF 85 3C} is \texttt{analog\_config\_bits} value (1 byte).
+
+\hexadecimal{1F FF 85 3D} is \texttt{analog\_num\_average} (1 byte).
+
 \hexadecimal{1F FF 8A E8} is \texttt{systick\_millis\_count} (4 bytes).
+
+\hexadecimal{1F FF 8D 6A} is \texttt{calibrating} (1 byte).
+
+\hexadecimal{1F FF 8D 6B} is \texttt{analog\_reference\_internal} (1 byte).
+
+\hexadecimal{?? ?? ?? ??} is \texttt{analog\_right\_shift} (1 byte).
+
