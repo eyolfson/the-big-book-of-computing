@@ -246,6 +246,10 @@ to the watchdog.
 
 \hexadecimal{00 00 14 12} is return from \texttt{ultoa}.
 
+\hexadecimal{00 00 14 30} is move stack pointer up 5 values.
+
+\hexadecimal{00 00 14 32} is return (pop \texttt{R15}).
+
 \vspace{1em}
 
 \hexadecimal{00 00 14 34} is \texttt{FTFL\_FSTAT} address (4 bytes).
@@ -254,14 +258,18 @@ to the watchdog.
 
 \hexadecimal{00 00 14 3C} is \texttt{FTFL\_FCCOB7} address (4 bytes).
 
-\hexadecimal{00 00 14 40} is {\scriptsize
-\texttt{usb\_string\_serial\_number\_default.wString}} address (4 bytes).
+\hexadecimal{00 00 14 40} is {\tiny
+\texttt{usb\_string\_serial\_number\_default}} address (4 bytes).
+
+\textbf{Total: 96 bytes}
 
 \paragraph{\texttt{usb\_init (usb\_dev.c)}} Unknown
 
 \hexadecimal{00 00 1C 0C} is entry point (push \texttt{R3} and \texttt{R14}).
 
 \hexadecimal{00 00 1C 0E} is branch to \texttt{usb\_init\_serialnumber}.
+
+\hexadecimal{00 00 1C 12} is return from \texttt{usb\_init\_serialnumber}.
 
 \paragraph{\texttt{ultoa (nonstd.c)}} Convert integer to string (with radix).
 
@@ -310,6 +318,9 @@ Below are all the variables:
 
 \vspace{1em}
 
+\hexadecimal{1F FF 85 22} is {\tiny
+\texttt{usb\_string\_serial\_number\_default}} struct (12 bytes).
+
 \hexadecimal{1F FF 85 3C} is \texttt{analog\_config\_bits} value (1 byte).
 
 \hexadecimal{1F FF 85 3D} is \texttt{analog\_num\_average} (1 byte).
@@ -321,3 +332,4 @@ Below are all the variables:
 \hexadecimal{1F FF 8D 6B} is \texttt{analog\_reference\_internal} (1 byte).
 
 \hexadecimal{?? ?? ?? ??} is \texttt{analog\_right\_shift} (1 byte).
+
