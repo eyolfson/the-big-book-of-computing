@@ -83,6 +83,8 @@ The following is the program flow:
 
 \hspace{6mm} \texttt{usb\_init\_serialnumber (usb\_desc.c)}
 
+\hspace{8mm} \texttt{ultoa (nonstd.c)}
+
 \subsection{Functions}
 
 \paragraph{\texttt{ResetHandler (mk20dx128.c)}} Reset interrupt handler.
@@ -240,11 +242,34 @@ to the watchdog.
 (push \texttt{R0}, \texttt{R1}, \texttt{R2}, \texttt{R3},
 \texttt{R4}, \texttt{R14})
 
+\hexadecimal{00 00 14 0E} is branch to \texttt{ultoa}.
+
+\hexadecimal{00 00 14 12} is return from \texttt{ultoa}.
+
+\vspace{1em}
+
+\hexadecimal{00 00 14 34} is \texttt{FTFL\_FSTAT} address (4 bytes).
+
+\hexadecimal{00 00 14 38} is \texttt{FTFL\_FCCOB0} address (4 bytes).
+
+\hexadecimal{00 00 14 3C} is \texttt{FTFL\_FCCOB7} address (4 bytes).
+
+\hexadecimal{00 00 14 40} is {\scriptsize
+\texttt{usb\_string\_serial\_number\_default.wString}} address (4 bytes).
+
 \paragraph{\texttt{usb\_init (usb\_dev.c)}} Unknown
 
 \hexadecimal{00 00 1C 0C} is entry point (push \texttt{R3} and \texttt{R14}).
 
 \hexadecimal{00 00 1C 0E} is branch to \texttt{usb\_init\_serialnumber}.
+
+\paragraph{\texttt{ultoa (nonstd.c)}} Convert integer to string (with radix).
+
+\hexadecimal{00 00 1D 28} is entry point (push \texttt{R4} and \texttt{R14}).
+
+\hexadecimal{00 00 1D 62} is exit (pop \texttt{R4} and \texttt{R15}) (2 bytes).
+
+\textbf{Total: 60 bytes}
 
 \paragraph{\texttt{analog\_init (analog.c)}} Unknown
 
@@ -296,4 +321,3 @@ Below are all the variables:
 \hexadecimal{1F FF 8D 6B} is \texttt{analog\_reference\_internal} (1 byte).
 
 \hexadecimal{?? ?? ?? ??} is \texttt{analog\_right\_shift} (1 byte).
-
