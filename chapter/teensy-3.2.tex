@@ -42,3 +42,112 @@ In other words it occurs every ms (millisecond).
 Core clock is used for systick.
 Generates a SysTick interrupt when 0.
 Counter operates in multi-shot manner.
+
+\newpage
+\section{Blinking LED}
+
+The hex file to transfer to the Teensy is actually 14324 bytes.
+Let's see if we can account for all 14324 bytes.
+All instructions are at least 2 bytes, giving a maximum of 7162 instructions.
+
+The address \hexadecimal{00 00 00 00} is the vector table. This table contains
+addresses for each entry. Only entry 0, 1, and 15 are important for now.
+
+Minimum alignment is 128 bytes (32 addresses). The first entry is the stack
+pointer, all others are destinations of a branch and must have bit 0 set to 1.
+
+[\hexadecimal{00 00 31 F0}, \hexadecimal{00 00 37 F4}) are part of the data
+section. This accounts for 1540 bytes. It's copied to
+[\hexadecimal{1F FF 84 40}, \hexadecimal{1F FF 8A 44}).
+
+The zero'ed memory section does not take up any space in the executable itself
+but does exist in RAM. The zero'ed section is the addresses in the range
+[\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
+This takes up 1000 bytes.
+
+\paragraph{\texttt{ResetHandler (mk20dx128.c)}} Reset interrupt handler.
+
+\hexadecimal{00 00 01 BC} is load watchdog address.
+
+\vspace{1em}
+
+\hexadecimal{00 00 02 0C} is data copy loop setup start.
+
+\hexadecimal{00 00 02 14} is the initial branch into the conditional check.
+
+\hexadecimal{00 00 02 16} is the start of the loop body.
+
+\hexadecimal{00 00 02 1A} is the end of the loop body.
+
+\hexadecimal{00 00 02 1C} is the start of the conditional check.
+
+\hexadecimal{00 00 02 20} conditional branch back into loop.
+
+\vspace{1em}
+
+\hexadecimal{00 00 02 22} is data copy loop setup start.
+
+\hexadecimal{00 00 02 30} conditional branch back into loop.
+
+\vspace{1em}
+
+\hexadecimal{00 00 02 44} conditional branch back into loop (int. priority).
+
+\vspace{1em}
+
+\hexadecimal{00 00 02 D8} is \texttt{\_\_enable\_irq}.
+
+\paragraph{\texttt{startup\_early\_hook (mk20dx128.c)}} Default, allows updates
+to the watchdog.
+
+\hexadecimal{00 00 13 88} is entry point.
+
+\hexadecimal{00 00 13 8E} is \texttt{return}.
+
+\paragraph{\texttt{delay (pins\_teensy.c)}} Delays the processor at least
+specified number of milliseconds.
+
+\hexadecimal{00 00 08 5C} is call to \texttt{micros()} in \texttt{while}.
+
+\hexadecimal{00 00 08 6E} is \texttt{yield()}.
+
+\hexadecimal{00 00 08 68} is conditional branch to \texttt{return}.
+
+\hexadecimal{00 00 08 74} is \texttt{return} (with \texttt{POP}).
+
+\paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
+microseconds.
+
+\hexadecimal{00 00 08 10} is \texttt{\_\_disable\_irq}.
+
+\hexadecimal{00 00 08 1E} is \texttt{\_\_enable\_irq}.
+
+\hexadecimal{00 00 08 3E} is \texttt{return ...}.
+
+\paragraph{\texttt{??? (???)}} Unknown
+
+\hexadecimal{00 00 08 CE} is \texttt{return ...} (with \texttt{POP}).
+
+\paragraph{\texttt{??? (???)}} Unknown
+
+\hexadecimal{00 00 08 D2} is branch to ???.
+
+\paragraph{\texttt{yield (???)}} Unknown
+
+\hexadecimal{00 00 10 00} is an immediate return.
+
+\subsection{Variables}
+
+Below are all the variables:
+
+\hexadecimal{00 00 03 40} is \texttt{MCG\_S} address (4 bytes).
+
+\hexadecimal{00 00 03 44} is \texttt{MCG\_C5} address (4 bytes).
+
+\hexadecimal{00 00 03 54} is \texttt{SIM\_CLKDIV2} address (4 bytes).
+
+\hexadecimal{00 00 03 58} is \texttt{SIM\_SOPT2} constant value (4 bytes).
+
+\hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
+
+\hexadecimal{1F FF 8A E8} is \texttt{systick\_millis\_count} (4 bytes).
