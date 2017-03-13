@@ -81,6 +81,8 @@ The following is the program flow:
 
 \hspace{4mm} \texttt{usb\_init (usb\_dev.c)}
 
+\hspace{6mm} \texttt{usb\_init\_serialnumber (usb\_desc.c)}
+
 \subsection{Functions}
 
 \paragraph{\texttt{ResetHandler (mk20dx128.c)}} Reset interrupt handler.
@@ -117,11 +119,49 @@ The following is the program flow:
 
 \hexadecimal{00 00 02 DA} call to \texttt{\_init\_Teensyduino\_internal\_}
 
+\vspace{1em}
+
+\hexadecimal{00 00 03 40} is \texttt{MCG\_S} address (4 bytes).
+
+\hexadecimal{00 00 03 44} is \texttt{MCG\_C5} address (4 bytes).
+
+\hexadecimal{00 00 03 54} is \texttt{SIM\_CLKDIV2} address (4 bytes).
+
+\hexadecimal{00 00 03 58} is \texttt{SIM\_SOPT2} constant value (4 bytes).
+
+\hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
+
 \paragraph{\texttt{??? (???)}} Enables Port A-E IRQs.
 
 \hexadecimal{00 00 05 08} is entry point.
 
 \hexadecimal{00 00 05 28} is exit point.
+
+\hexadecimal{00 00 05 2A} is empty padding (2 bytes) [?].
+
+\hexadecimal{00 00 05 2C} is \texttt{NVIC\_ISER2} address (4 bytes).
+
+\textbf{Total: 40 bytes}
+
+
+\paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
+microseconds.
+
+\hexadecimal{00 00 08 10} is \texttt{\_\_disable\_irq}.
+
+\hexadecimal{00 00 08 1E} is \texttt{\_\_enable\_irq}.
+
+\hexadecimal{00 00 08 3E} is \texttt{return ...}.
+
+\vspace{1em}
+
+\hexadecimal{00 00 08 40} is \texttt{SYST\_CVR} address (4 bytes).
+
+\hexadecimal{00 00 08 44} is \texttt{ICSR} address (4 bytes).
+
+\hexadecimal{00 00 08 48} is \texttt{systick\_millis\_count} address (4 bytes).
+
+\textbf{Total: 60 bytes}
 
 \paragraph{\texttt{delay (pins\_teensy.c)}} Delays the processor at least
 specified number of milliseconds.
@@ -139,37 +179,49 @@ specified number of milliseconds.
 
 \hexadecimal{00 00 08 74} is \texttt{return} (with \texttt{POP}).
 
+\hexadecimal{00 00 08 76} is empty padding (2 bytes) [?].
+
+\textbf{Total: 44 bytes}
+
 \paragraph{\texttt{\_init\_Teensyduino\_internal\_ (pins\_teensy.c)}}
 Init.
 
 \hexadecimal{00 00 08 78} is entry (push \texttt{R4}, \texttt{R14}).
+
+\hexadecimal{00 00 08 7A} is branch to enable port A-E IRQs.
 
 \hexadecimal{00 00 08 CA} call to \texttt{delay} (4 bytes)
 
 \hexadecimal{00 00 08 CE} return from \texttt{delay} (4 bytes) (pop \texttt{R4},
 \texttt{R5}, \texttt{R6}, \texttt{R14}).
 
+\hexadecimal{00 00 08 D2} is branch to \texttt{usb\_init}.
 
-\paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
-microseconds.
+\vspace{1em}
 
-\hexadecimal{00 00 08 10} is \texttt{\_\_disable\_irq}.
+\hexadecimal{00 00 08 D8} is \texttt{FTM0\_CNT} address (4 bytes).
 
-\hexadecimal{00 00 08 1E} is \texttt{\_\_enable\_irq}.
+\hexadecimal{00 00 08 DC} is \texttt{FTM0\_C0SC} address (4 bytes).
 
-\hexadecimal{00 00 08 3E} is \texttt{return ...}.
+\hexadecimal{00 00 08 E0} is \texttt{FTM0\_SC} address (4 bytes).
 
-\paragraph{\texttt{??? (???)}} Unknown
+\hexadecimal{00 00 08 E4} is \texttt{FTM1\_CNT} address (4 bytes).
 
-\hexadecimal{00 00 08 CE} is \texttt{return ...} (with \texttt{POP}).
+\hexadecimal{00 00 08 E8} is \texttt{FTM2\_CNT} address (4 bytes).
 
-\paragraph{\texttt{??? (???)}} Unknown
+\hexadecimal{00 00 08 EC} is \texttt{FTM2\_MOD} address (4 bytes).
 
-\hexadecimal{00 00 08 D2} is branch to ???.
+\hexadecimal{00 00 08 F0} is \texttt{FTM2\_C0SC} address (4 bytes).
 
-\paragraph{\texttt{yield (???)}} Unknown
+\hexadecimal{00 00 08 F4} is \texttt{FTM2\_SC} address (4 bytes).
+
+\textbf{Total: 128 bytes}
+
+\paragraph{\texttt{yield (???)}} Unknown.
 
 \hexadecimal{00 00 10 00} is an immediate return.
+
+\textbf{Total: 2 bytes}
 
 \paragraph{\texttt{startup\_early\_hook (mk20dx128.c)}} Default, allows updates
 to the watchdog.
@@ -178,9 +230,21 @@ to the watchdog.
 
 \hexadecimal{00 00 13 8E} is \texttt{return}.
 
+\hexadecimal{00 00 13 90} is \texttt{WDOG\_STCTRLH} address.
+
+\textbf{Total: 12 bytes}
+
+\paragraph{\texttt{usb\_init\_serialnumber (usb\_desc.c)}} Set serial number.
+
+\hexadecimal{00 00 13 E4} is entry point.
+(push \texttt{R0}, \texttt{R1}, \texttt{R2}, \texttt{R3},
+\texttt{R4}, \texttt{R14})
+
 \paragraph{\texttt{usb\_init (usb\_dev.c)}} Unknown
 
-\hexadecimal{00 00 1C 0C} is entry point.
+\hexadecimal{00 00 1C 0C} is entry point (push \texttt{R3} and \texttt{R14}).
+
+\hexadecimal{00 00 1C 0E} is branch to \texttt{usb\_init\_serialnumber}.
 
 \paragraph{\texttt{analog\_init (analog.c)}} Unknown
 
@@ -218,34 +282,6 @@ to the watchdog.
 \subsection{Variables}
 
 Below are all the variables:
-
-\hexadecimal{00 00 03 40} is \texttt{MCG\_S} address (4 bytes).
-
-\hexadecimal{00 00 03 44} is \texttt{MCG\_C5} address (4 bytes).
-
-\hexadecimal{00 00 03 54} is \texttt{SIM\_CLKDIV2} address (4 bytes).
-
-\hexadecimal{00 00 03 58} is \texttt{SIM\_SOPT2} constant value (4 bytes).
-
-\hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
-
-\vspace{1em}
-
-\hexadecimal{00 00 08 D8} is \texttt{FTM0\_CNT} address (4 bytes).
-
-\hexadecimal{00 00 08 DC} is \texttt{FTM0\_C0SC} address (4 bytes).
-
-\hexadecimal{00 00 08 E0} is \texttt{FTM0\_SC} address (4 bytes).
-
-\hexadecimal{00 00 08 E4} is \texttt{FTM1\_CNT} address (4 bytes).
-
-\hexadecimal{00 00 08 E8} is \texttt{FTM2\_CNT} address (4 bytes).
-
-\hexadecimal{00 00 08 EC} is \texttt{FTM2\_MOD} address (4 bytes).
-
-\hexadecimal{00 00 08 F0} is \texttt{FTM2\_C0SC} address (4 bytes).
-
-\hexadecimal{00 00 08 F4} is \texttt{FTM2\_SC} address (4 bytes).
 
 \vspace{1em}
 
