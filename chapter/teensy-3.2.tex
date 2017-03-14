@@ -65,6 +65,8 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
+Current accounting for \textbf{634 bytes} in functions.
+
 \subsection{Execution}
 
 The following is the program flow:
@@ -263,13 +265,15 @@ to the watchdog.
 
 \textbf{Total: 96 bytes}
 
-\paragraph{\texttt{usb\_init (usb\_dev.c)}} Unknown
+\paragraph{\texttt{usb\_init (usb\_dev.c)}} \texttt{NUM\_ENDPOINTS} is 6.
 
 \hexadecimal{00 00 1C 0C} is entry point (push \texttt{R3} and \texttt{R14}).
 
 \hexadecimal{00 00 1C 0E} is branch to \texttt{usb\_init\_serialnumber}.
 
 \hexadecimal{00 00 1C 12} is return from \texttt{usb\_init\_serialnumber}.
+
+\hexadecimal{00 00 1C 90} is address of \texttt{table}.
 
 \paragraph{\texttt{ultoa (nonstd.c)}} Convert integer to string (with radix).
 
@@ -317,6 +321,8 @@ to the watchdog.
 Below are all the variables:
 
 \vspace{1em}
+
+\hexadecimal{1F FF 80 00} is USB descriptor table \texttt{table}.
 
 \hexadecimal{1F FF 85 22} is {\tiny
 \texttt{usb\_string\_serial\_number\_default}} struct (12 bytes).
