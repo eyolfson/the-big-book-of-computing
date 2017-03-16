@@ -266,6 +266,8 @@ to the watchdog.
 \textbf{Total: 96 bytes}
 
 \paragraph{\texttt{usb\_init (usb\_dev.c)}} \texttt{NUM\_ENDPOINTS} is 6.
+Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
+\hexadecimal{1F FF 80 C8}) which is 200 bytes.
 
 \hexadecimal{00 00 1C 0C} is entry point (push \texttt{R3} and \texttt{R14}).
 
@@ -322,7 +324,7 @@ Below are all the variables:
 
 \vspace{1em}
 
-\hexadecimal{1F FF 80 00} is USB descriptor table \texttt{table}.
+\hexadecimal{1F FF 80 00} is USB descriptor table \texttt{table} (224 bytes).
 
 \hexadecimal{1F FF 85 22} is {\tiny
 \texttt{usb\_string\_serial\_number\_default}} struct (12 bytes).
