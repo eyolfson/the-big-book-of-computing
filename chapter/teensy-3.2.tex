@@ -65,7 +65,7 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
-Current accounting for \textbf{634 bytes} in functions.
+Current accounting for \textbf{790 bytes} in functions.
 
 \subsection{Execution}
 
@@ -86,6 +86,8 @@ The following is the program flow:
 \hspace{6mm} \texttt{usb\_init\_serialnumber (usb\_desc.c)}
 
 \hspace{8mm} \texttt{ultoa (nonstd.c)}
+
+\hspace{2mm} \texttt{rtc\_set (pins\_teensy.c)}
 
 \subsection{Functions}
 
@@ -123,7 +125,13 @@ The following is the program flow:
 
 \hexadecimal{00 00 02 DA} call to \texttt{\_init\_Teensyduino\_internal\_}
 
+\hexadecimal{00 00 02 DE} return from \texttt{\_init\_Teensyduino\_internal\_} (actually \texttt{usb\_init})
+
+\hexadecimal{00 00 02 EC} call to \texttt{rtc\_set}
+
 \vspace{1em}
+
+\hexadecimal{00 00 03 10} is \texttt{RTC\_SR} address (4 bytes).
 
 \hexadecimal{00 00 03 40} is \texttt{MCG\_S} address (4 bytes).
 
@@ -275,15 +283,21 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 
 \hexadecimal{00 00 1C 12} is return from \texttt{usb\_init\_serialnumber}.
 
+\hexadecimal{00 00 1C 8E} is exit point (pop \texttt{R3} and \texttt{R15}).
+
 \hexadecimal{00 00 1C 90} is address of \texttt{table}.
 
 \hexadecimal{00 00 1C 94} is address of \texttt{SIM\_SCGC4}.
 
-\hexadecimal{00 00 1C 98} is address of \texttt{USB\_USBTRC0}.
+\hexadecimal{00 00 1C 98} is address of \texttt{USB0\_USBTRC0}.
 
-\hexadecimal{00 00 1C 9C} is address of \texttt{USB\_BDTPAGE1}.
+\hexadecimal{00 00 1C 9C} is address of \texttt{USB0\_BDTPAGE1}.
 
 \hexadecimal{00 00 1C A0} is address of \texttt{NVIC\_IPR18} (Number 73).
+
+\hexadecimal{00 00 1C A4} is address of \texttt{USB0\_CONTROL}.
+
+\textbf{Total: 156 bytes}
 
 \paragraph{\texttt{ultoa (nonstd.c)}} Convert integer to string (with radix).
 
@@ -325,6 +339,11 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 \hexadecimal{00 00 21 58} is \texttt{calibrating} address (4 bytes).
 
 \textbf{Total: 192 bytes}
+
+\paragraph{\texttt{rtc\_set (pins\_teensy.c)}} Sets the real-time clock.
+
+\hexadecimal{00 00 25 94} is entry point (push \texttt{R4}, \texttt{R5},
+\texttt{R6}, \texttt{R14}).
 
 \subsection{Variables}
 
