@@ -87,7 +87,7 @@ The following is the program flow:
 
 \hspace{8mm} \texttt{ultoa (nonstd.c)}
 
-\hspace{2mm} \texttt{rtc\_set (pins\_teensy.c)}
+\hspace{2mm} \texttt{\_\_libc\_init\_array (???)}
 
 \subsection{Functions}
 
@@ -340,7 +340,7 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 
 \textbf{Total: 192 bytes}
 
-\paragraph{\texttt{rtc\_set (pins\_teensy.c)}} Sets the real-time clock.
+\paragraph{\texttt{\_\_libc\_init\_array (???)}} Provided by C.
 
 \hexadecimal{00 00 25 94} is entry point (push \texttt{R4}, \texttt{R5},
 \texttt{R6}, \texttt{R14}).
