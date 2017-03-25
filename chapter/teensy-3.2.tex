@@ -65,7 +65,7 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
-Current accounting for \textbf{790 bytes} in functions.
+Current accounting for \textbf{914 bytes} in functions.
 
 \subsection{Execution}
 
@@ -88,6 +88,14 @@ The following is the program flow:
 \hspace{8mm} \texttt{ultoa (nonstd.c)}
 
 \hspace{2mm} \texttt{\_\_libc\_init\_array (???)}
+
+\hspace{4mm} \texttt{\_init? (???)}
+
+\hspace{4mm} \texttt{\_\_init\_array\_start[0] (???)}
+
+\hspace{6mm} \texttt{unknown1 (???)}
+
+\hspace{4mm} \texttt{\_\_init\_array\_start[1] (???)}
 
 \subsection{Functions}
 
@@ -127,7 +135,7 @@ The following is the program flow:
 
 \hexadecimal{00 00 02 DE} return from \texttt{\_init\_Teensyduino\_internal\_} (actually \texttt{usb\_init})
 
-\hexadecimal{00 00 02 EC} call to \texttt{rtc\_set}
+\hexadecimal{00 00 02 EC} call to \texttt{\_\_libc\_init\_array}
 
 \vspace{1em}
 
@@ -143,6 +151,23 @@ The following is the program flow:
 
 \hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
 
+\paragraph{\texttt{unknown1 (???)}} Loads data end (or zero'ed memory start) and
+is a noop.
+
+\hexadecimal{00 00 04 38} is entry point (push \texttt{R3}, \texttt{R14}).
+
+\hexadecimal{00 00 04 56} is exit point (pop \texttt{R3}, \texttt{R15}).
+
+\textbf{Total: 32 bytes}
+
+\paragraph{\texttt{\_\_init\_array\_start[0] (???)}} Array initialization.
+
+\hexadecimal{00 00 04 98} is entry point (push \texttt{R3}, \texttt{R14}).
+
+\hexadecimal{00 00 04 D4} is call to \texttt{unknown1}.
+
+\textbf{Total: 64 bytes (?)}
+
 \paragraph{\texttt{??? (???)}} Enables Port A-E IRQs.
 
 \hexadecimal{00 00 05 08} is entry point.
@@ -154,7 +179,6 @@ The following is the program flow:
 \hexadecimal{00 00 05 2C} is \texttt{NVIC\_ISER2} address (4 bytes).
 
 \textbf{Total: 40 bytes}
-
 
 \paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
 microseconds.
@@ -340,10 +364,51 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 
 \textbf{Total: 192 bytes}
 
-\paragraph{\texttt{\_\_libc\_init\_array (???)}} Provided by C.
+\paragraph{\texttt{\_\_init\_array\_start[1] (???)}} Array initialization.
+
+\hexadecimal{00 00 22 60} is entry point.
+
+\hexadecimal{00 00 22 72} is exit point.
+
+\hexadecimal{00 00 22 74} is \texttt{unknownvar1} address (4 bytes).
+
+\hexadecimal{00 00 22 78} is constant value address (4 bytes).
+
+\textbf{Total: 28 bytes}
+
+\paragraph{\texttt{\_\_init\_array\_start[2] (???)}} Array initialization.
+
+\hexadecimal{00 00 23 58} is entry point.
+
+\paragraph{\texttt{\_\_libc\_init\_array (???)}} Provided by C. It seems the
+function pointer array,  \texttt{\_\_init\_array\_start}, starts at
+\hexadecimal{31 D4} and ends at \hexadecimal{31 F0} (which is the beginning of
+data). This is \hexadecimal{1C} bytes long, or 7 function pointers.
 
 \hexadecimal{00 00 25 94} is entry point (push \texttt{R4}, \texttt{R5},
 \texttt{R6}, \texttt{R14}).
+
+\hexadecimal{00 00 25 CE} is call to \texttt{\_init?}.
+
+\hexadecimal{00 00 25 D2} is return from \texttt{\_init?}.
+
+\hexadecimal{00 00 25 E0} is call to \texttt{\_\_init\_array\_start[i]}.
+
+\hexadecimal{00 00 25 E2} is return from \texttt{\_\_init\_array\_start[i]}.
+
+\paragraph{\texttt{\_init? (???)}} Best guess.
+
+\hexadecimal{00 00 31 C8} is entry point (push \texttt{R3}, \texttt{R4},
+\texttt{R5}, \texttt{R6}, \texttt{R7}, \texttt{R14}).
+
+\hexadecimal{00 00 31 CC} is pop \texttt{R3}, \texttt{R4}, \texttt{R5},
+\texttt{R6}, \texttt{R7}.
+
+\hexadecimal{00 00 31 CE} is pop \texttt{R3} (old \texttt{R14}).
+
+\hexadecimal{00 00 31 D0} is move \texttt{R3} to \texttt{R14}.
+
+\hexadecimal{00 00 31 D2} is exit.
 
 \subsection{Variables}
 
@@ -366,5 +431,12 @@ Below are all the variables:
 
 \hexadecimal{1F FF 8D 6B} is \texttt{analog\_reference\_internal} (1 byte).
 
-\hexadecimal{?? ?? ?? ??} is \texttt{analog\_right\_shift} (1 byte).
+\hexadecimal{1F FF 8D 74} is \texttt{unknowvar1} (4 byte) (= \hexadecimal{00 00 30 90}).
 
+\hexadecimal{1F FF 8D 78} is \texttt{unknowvar1} (1 byte) (= \hexadecimal{00}).
+
+\hexadecimal{1F FF 8D 7C} is \texttt{unknowvar1} (4 bytes) (= \hexadecimal{00 00 03 E8}).
+
+\hexadecimal{1F FF 8D 80} is \texttt{unknowvar1} (1 byte) (= \hexadecimal{00}).
+
+\hexadecimal{?? ?? ?? ??} is \texttt{analog\_right\_shift} (1 byte).
