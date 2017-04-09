@@ -65,7 +65,7 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
-Current accounting for \textbf{992 bytes} in functions.
+Current accounting for \textbf{1134 bytes} in functions.
 
 \subsection{Execution}
 
@@ -96,6 +96,14 @@ The following is the program flow:
 \hspace{6mm} \texttt{unknown1 (???)}
 
 \hspace{4mm} \texttt{\_\_init\_array\_start[1] (???)}
+
+\hspace{2mm} \texttt{startup\_late\_hook (mk20dx128.c)}
+
+\hspace{2mm} \texttt{main (main.cpp)}
+
+\hspace{4mm} \texttt{setup (???)}
+
+\hspace{6mm} \texttt{pinMode (pins\_teensy.c)}
 
 \subsection{Functions}
 
@@ -137,6 +145,10 @@ The following is the program flow:
 
 \hexadecimal{00 00 02 EC} call to \texttt{\_\_libc\_init\_array}
 
+\hexadecimal{00 00 02 F0} call to \texttt{startup\_late\_hook}
+
+\hexadecimal{00 00 02 F4} call to \texttt{main}
+
 \vspace{1em}
 
 \hexadecimal{00 00 03 10} is \texttt{RTC\_SR} address (4 bytes).
@@ -166,7 +178,13 @@ is a noop.
 
 \hexadecimal{00 00 04 D4} is call to \texttt{unknown1}.
 
-\textbf{Total: 64 bytes (?)}
+\textbf{Total: 64 bytes}
+
+\paragraph{\texttt{setup (???)}} Sets the pin's operation.
+
+\hexadecimal{00 00 04 D8} is entry point.
+
+\hexadecimal{00 00 04 DC} is call to \texttt{pinMode}.
 
 \paragraph{\texttt{??? (???)}} Enables Port A-E IRQs.
 
@@ -179,6 +197,16 @@ is a noop.
 \hexadecimal{00 00 05 2C} is \texttt{NVIC\_ISER2} address (4 bytes).
 
 \textbf{Total: 40 bytes}
+
+\paragraph{\texttt{pinMode (pins\_teensy.c)}} Sets the pin's operation.
+
+\hexadecimal{00 00 07 D8} is entry point.
+
+\hexadecimal{00 00 08 0A} is exit point.
+
+\hexadecimal{00 00 08 0C} is address of \texttt{?} (\hexadecimal{00 00 2E EC}).
+
+\textbf{Total: 56 bytes}
 
 \paragraph{\texttt{micros (pins\_teensy.c)}} Returns current time in
 microseconds.
@@ -268,7 +296,11 @@ to the watchdog.
 
 \hexadecimal{00 00 13 90} is \texttt{WDOG\_STCTRLH} address.
 
-\textbf{Total: 12 bytes}
+\paragraph{\texttt{startup\_late\_hook (mk20dx128.c)}} Default is no-op.
+
+\hexadecimal{00 00 13 94} is entry and exit point.
+
+\textbf{Total: 2 bytes}
 
 \paragraph{\texttt{usb\_init\_serialnumber (usb\_desc.c)}} Set serial number.
 
@@ -412,6 +444,12 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 
 \textbf{Total: 20 bytes}
 
+\paragraph{\texttt{main (main.cpp)}} The main function.
+
+\hexadecimal{00 00 24 E0} is entry point (push \texttt{R3}, \texttt{R14}).
+
+\hexadecimal{00 00 24 E2} is call to \texttt{setup}.
+
 \paragraph{\texttt{\_\_init\_array\_start[6] (???)}} Array initialization.
 
 \hexadecimal{00 00 25 58} is entry point.
@@ -441,6 +479,11 @@ data). This is \hexadecimal{1C} bytes long, or 7 function pointers.
 \hexadecimal{00 00 25 E0} is call to \texttt{\_\_init\_array\_start[i]}.
 
 \hexadecimal{00 00 25 E2} is return from \texttt{\_\_init\_array\_start[i]}.
+
+\hexadecimal{00 00 25 E6} is exit point (pop \texttt{R4}, \texttt{R5},
+\texttt{R6}, \texttt{R15}).
+
+\textbf{Total: 84 bytes}
 
 \paragraph{\texttt{unknown3 (???)}} No idea.
 
