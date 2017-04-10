@@ -65,7 +65,7 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
-Current accounting for \textbf{1134 bytes} in functions.
+Current accounting for \textbf{1142 bytes} in functions.
 
 \subsection{Execution}
 
@@ -104,6 +104,8 @@ The following is the program flow:
 \hspace{4mm} \texttt{setup (???)}
 
 \hspace{6mm} \texttt{pinMode (pins\_teensy.c)}
+
+\hspace{4mm} \texttt{loop (???)}
 
 \subsection{Functions}
 
@@ -186,6 +188,14 @@ is a noop.
 
 \hexadecimal{00 00 04 DC} is call to \texttt{pinMode}.
 
+\textbf{Total: 8 bytes}
+
+\paragraph{\texttt{loop (???)}} Unknown.
+
+\hexadecimal{00 00 04 E0} is entry point (push \texttt{R3}, \texttt{R14}).
+
+\hexadecimal{00 00 04 E6} is call to \texttt{digitalWriteFast}.
+
 \paragraph{\texttt{??? (???)}} Enables Port A-E IRQs.
 
 \hexadecimal{00 00 05 08} is entry point.
@@ -197,6 +207,11 @@ is a noop.
 \hexadecimal{00 00 05 2C} is \texttt{NVIC\_ISER2} address (4 bytes).
 
 \textbf{Total: 40 bytes}
+
+\paragraph{\texttt{digitalWriteFast (pins\_teensy.c) (?)}} Write high or low to the
+pin.
+
+\hexadecimal{00 00 07 98} is entry point.
 
 \paragraph{\texttt{pinMode (pins\_teensy.c)}} Sets the pin's operation.
 
@@ -449,6 +464,10 @@ Zeros \texttt{table} from [\hexadecimal{1F FF 80 00},
 \hexadecimal{00 00 24 E0} is entry point (push \texttt{R3}, \texttt{R14}).
 
 \hexadecimal{00 00 24 E2} is call to \texttt{setup}.
+
+\hexadecimal{00 00 24 E6} is return from \texttt{setup}.
+
+\hexadecimal{00 00 24 E6} is call to \texttt{loop}.
 
 \paragraph{\texttt{\_\_init\_array\_start[6] (???)}} Array initialization.
 
