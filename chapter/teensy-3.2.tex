@@ -65,7 +65,7 @@ but does exist in RAM. The zero'ed section is the addresses in the range
 [\hexadecimal{1F FF 8A 44}, \hexadecimal{1F FF 8E 2C}).
 This takes up 1000 bytes.
 
-Current accounting for \textbf{1142 bytes} in functions.
+Current accounting for \textbf{1206 bytes} in functions.
 
 \subsection{Execution}
 
@@ -212,6 +212,10 @@ is a noop.
 pin.
 
 \hexadecimal{00 00 07 98} is entry point.
+
+\hexadecimal{00 00 07 D4} is address of \texttt{?} (\hexadecimal{00 00 2E EC}).
+
+\textbf{Total: 64 bytes}
 
 \paragraph{\texttt{pinMode (pins\_teensy.c)}} Sets the pin's operation.
 
