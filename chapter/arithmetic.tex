@@ -1,0 +1,55 @@
+\chapter{Arithmetic}
+
+Example of floor:
+
+$\lfloor 0.8 \rfloor = 0$
+
+Example of ceiling:
+
+$\lceil 0.2 \rceil = 1$
+
+Truncation:
+
+$\text{trunc}(x, n)$
+
+\section{Modulo}
+
+Dividend / Divisor = (Quotient, Remainder)
+
+$a / b = (q, r)$
+
+where
+
+$a = bq + r$
+
+there's a unique answer for $a, b$ when $0 \leq r < |b|$.
+
+$a = 7, b = 3$ then $q = 2, r = 1$.
+
+$a = 7, b = -3$ then $q = -2, r = 1$.
+
+$a = -7, b = 3$ then $q = -3, r = 2$.
+
+$a = -7, b = -3$ then $q = 3, r = 2$.
+
+But, in \texttt{python} (using \texttt{//} for floor divison):
+
+$a = 7, b = 3$ then $q = 2, r = 1$.
+
+$a = 7, b = -3$ then $q = -3, r = -2$.
+
+$a = -7, b = 3$ then $q = -3, r = 2$.
+
+$a = -7, b = -3$ then $q = 2, r = -1$.
+
+However, if we use truncated divison:
+
+$a = 7, b = 3$ then $q = 2, r = 1$.
+
+$a = 7, b = -3$ then $q = -2, r = 1$.
+
+$a = -7, b = 3$ then $q = -2, r = -1$.
+
+$a = -7, b = -3$ then $q = 2, r = -1$.
+
+See: https://www.microsoft.com/en-us/research/publication/division-and-modulus-for-computer-scientists/
