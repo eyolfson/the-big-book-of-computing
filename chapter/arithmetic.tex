@@ -63,37 +63,67 @@ See: https://www.microsoft.com/en-us/research/publication/division-and-modulus-f
 
 \subsection{Truncated}
 
-$q = \textrm{trunc}(a/b)$
+In truncated division:
 
-$r = a - b \textrm{trunc}(a/b)$
+$q = \textrm{trunc}(\frac{a}{b})$
+
+$r = a - b\ \textrm{trunc}(\frac{a}{b})$
 
 Same sign as the dividend (it should say unless it's zero!).
 
-Case 1) If $a$ is negative.
+Case 1)
+If $a$ is negative.
 
-Case 1a) If $b$ is positive then $r = a - b \lceil a/b \rceil$. Then $a \leq b
-\lceil a/b \rceil$ because it rounds up (division is negative). \textbf{OR.}
-Divide both sides by $b$ giving $a/b \leq \lceil a/b \rceil$, which is clearly
-true.
+Case 1a)
+If $b$ is positive then $r = a - b \lceil \frac{a}{b} \rceil$.
+Then $a \leq b \lceil \frac{a}{b} \rceil$ because it rounds up (division is
+negative).
+\textbf{OR.}
+Divide both sides by $b$ giving $\frac{a}{b} \leq \lceil \frac{a}{b} \rceil$,
+which is clearly true.
 
-Case 1b) If $b$ is negative then $r = a - b \lfloor a/b \rfloor$. Then $a \leq b
-\lfloor a/b \rfloor$ because it rounds down (division is positive). So it's a
-negative multiplied by a smaller positive number than without the floor,
-resulting in a larger result. \textbf{OR.} Divide both sides by $b$ ($b$ is
-negative so flip the inequality) giving $a/b \geq \lfloor a/b \rfloor$, which is
-clearly true.
+Case 1b)
+If $b$ is negative then $r = a - b \lfloor \frac{a}{b} \rfloor$.
+Then $a \leq b \lfloor \frac{a}{b} \rfloor$ because it rounds down (division is
+positive).
+So it's a negative multiplied by a smaller positive number than without the
+floor, resulting in a larger result.
+\textbf{OR.}
+Divide both sides by $b$ ($b$ is negative so flip the inequality) giving
+$\frac{a}{b} \geq \lfloor \frac{a}{b} \rfloor$, which is clearly true.
 
-Case 2) If $a$ is positive.
+Case 2)
+If $a$ is positive.
 
-Case 2a) If $b$ is positive then $r = a - b \lfloor a/b \rfloor$.
-         We know $a \geq b \lfloor a/b \rfloor$.
-         So $r$ is positive.
+Case 2a)
+If $b$ is positive then $r = a - b \lfloor \frac{a}{b} \rfloor$.
+We know $a \geq b \lfloor \frac{a}{b} \rfloor$.
+So $r$ is positive.
 
-Case 2b) If $b$ is negative then $r = a - b \lceil a/b \rceil$.
-         To be postive then $a \geq b \lceil a/b \rceil$.
-         Divide both sides by $b$ giving $a \leq \lceil a/b \rceil$.
-         So $r$ is positive.
+Case 2b)
+If $b$ is negative then $r = a - b \lceil \frac{a}{b} \rceil$.
+To be postive then $a \geq b \lceil \frac{a}{b} \rceil$.
+Divide both sides by $b$ giving $a \leq \lceil \frac{a}{b} \rceil$.
+So $r$ is positive.
 
 \subsection{Floored}
+
+In floored division:
+
+$q = \lfloor \frac{a}{b} \rfloor$
+
+$r = a - b \lfloor \frac{a}{b} \rfloor$
+
+If $b$ is positive.
+
+$\frac{a}{b} \geq \lfloor \frac{a}{b} \rfloor$
+
+Result is positive.
+
+If $b$ is negative.
+
+$\frac{a}{b} \leq \lfloor \frac{a}{b} \rfloor$
+
+Result is negative.
 
 \subsection{Euclidean}
