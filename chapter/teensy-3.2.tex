@@ -67,6 +67,8 @@ This takes up 1000 bytes.
 
 Current accounting for \textbf{1206 bytes} in functions.
 
+Total accounted for: \textbf{3190 bytes}.
+
 \subsection{Execution}
 
 The following is the program flow:
@@ -106,6 +108,19 @@ The following is the program flow:
 \hspace{6mm} \texttt{pinMode (pins\_teensy.c)}
 
 \hspace{4mm} \texttt{loop (???)}
+
+\subsection{Data}
+
+\paragraph{\texttt{VectorsRam (mk20dx128.c)}} Interrupt table.
+
+The first 16 vectors are core vectors that must be there. The remaining 95
+vectors are non-core. The number of non-core vectors depends on the chip.
+
+\hexadecimal{00 00 00 00} is the first address in the vector.
+
+\hexadecimal{00 00 01 B8} is the last address in the vector.
+
+\textbf{Total: 444 bytes}
 
 \subsection{Functions}
 
