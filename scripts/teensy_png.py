@@ -13,6 +13,12 @@ DARKGREEN = (0, 100, 0)
 LIME = (50, 205, 50)
 LIMEGREEN = (0, 255, 0)
 
+LIGHTSEAGREEN = (32, 178, 170)
+SEAGREEN = (46, 139, 87)
+
+ROYALBLUE = (65, 105, 225)
+MEDIUMBLUE = (0, 0, 205)
+
 class Squares:
 
 
@@ -31,8 +37,14 @@ class Squares:
 			normal_color = GREEN
 			dark_color = DARKGREEN
 		elif color == 3:
-			normal_color = LIME
-			dark_color = LIMEGREEN
+			normal_color = LIMEGREEN
+			dark_color = LIME
+		elif color == 4:
+			normal_color = LIGHTSEAGREEN
+			dark_color = SEAGREEN
+		elif color == 5:
+			normal_color = ROYALBLUE
+			dark_color = MEDIUMBLUE
 
 		x = start % self._num_x
 		y = start // self._num_x
@@ -60,4 +72,6 @@ s = Squares(120, 120)
 s.color(0x0000, 444, 1)
 s.color(0x01BC, 312, 2)
 s.color(0x0310,  16, 3)
+s.color(0x0810,  60, 4)
+s.color(0x084C,  44, 5)
 s.save()
