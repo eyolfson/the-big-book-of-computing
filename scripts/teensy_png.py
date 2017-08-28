@@ -56,17 +56,6 @@ class Squares:
 	def save(self):
 		self._img.save('test.png')
 
-	def go(self):
-		for x in range(0, 1080):
-			for y in range(0, 27):
-				if x % 9 == 0 or x % 9 == 8:
-					img.putpixel((x, y), DEEPPINK)
-				elif y % 9 == 0 or y % 9 == 8:
-					img.putpixel((x, y), DEEPPINK)
-				else:
-					img.putpixel((x, y), HOTPINK)
-
-
 s = Squares(120, 120)
 s.color(0x0000, 444, 1)
 s.color(0x01BC, 312, 2)
