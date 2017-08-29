@@ -166,7 +166,13 @@ vectors are non-core. The number of non-core vectors depends on the chip.
 
 \hexadecimal{00 00 02 F4} call to \texttt{main}
 
+\hexadecimal{00 00 02 F8} is an infinite loop.
+
+\hexadecimal{00 00 02 FA} is a noop (instruction encoding is 2 bytes).
+
 \vspace{1em}
+
+\hexadecimal{00 00 02 FC} is \texttt{WDOG\_UNLOCK} address (4 bytes).
 
 \hexadecimal{00 00 03 10} is \texttt{RTC\_SR} address (4 bytes).
 
@@ -179,6 +185,8 @@ vectors are non-core. The number of non-core vectors depends on the chip.
 \hexadecimal{00 00 03 58} is \texttt{SIM\_SOPT2} constant value (4 bytes).
 
 \hexadecimal{00 00 03 5C} is \texttt{SYST\_RVR} address (4 bytes).
+
+\textbf{Function length: 320 bytes}
 
 \paragraph{\texttt{unknown1 (???)}} Loads data end (or zero'ed memory start) and
 is a noop.
@@ -221,7 +229,7 @@ is a noop.
 
 \hexadecimal{00 00 05 28} is exit point.
 
-\hexadecimal{00 00 05 2A} is empty padding (2 bytes) [?].
+\hexadecimal{00 00 05 2A} is empty padding (2 bytes) [value is \hexadecimal{FF FF}].
 
 \hexadecimal{00 00 05 2C} is \texttt{NVIC\_ISER2} address (4 bytes).
 

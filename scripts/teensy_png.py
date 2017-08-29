@@ -22,6 +22,9 @@ MEDIUMBLUE = (0, 0, 205)
 ORANGE = (255, 165, 0)
 DARKORANGE = (255, 140, 0)
 
+RED = (255, 0, 0)
+DARKRED = (139, 0, 0)
+
 class Squares:
 
 
@@ -51,6 +54,9 @@ class Squares:
 		elif color == 6:
 			normal_color = ORANGE
 			dark_color = DARKORANGE
+		elif color == 7:
+			normal_color = RED
+			dark_color = DARKRED
 
 		x = start % self._num_x
 		y = start // self._num_x
@@ -76,11 +82,30 @@ class Squares:
 	def save(self):
 		self._img.save('test.png')
 
-s = Squares(120, 120)
+s = Squares(128, 112)
+
+# vector table
 s.color(0x0000,  444, 1)
-s.color(0x01BC,  312, 2)
-s.color(0x0310,   16, 3)
-s.color(0x0810,   60, 4)
-s.color(0x084C,   44, 5)
+
+# ResetHandler
+s.color(0x01BC,  320, 2)
+s.color(0x02FC,  100, 3)
+
+# digitWriteFast
+s.color(0x0798,   60, 2)
+s.color(0x07D4,    4, 3)
+
+# digitWriteFast
+s.color(0x07D8,   52, 4)
+s.color(0x080C,    4, 5)
+
+# micros
+s.color(0x0810,   48, 2)
+s.color(0x0840,   12, 3)
+
+# delay
+s.color(0x084C,   42, 4)
+s.color(0x0876,    2, 7)
+
 s.color(0x31F0, 1540, 6)
 s.save()
