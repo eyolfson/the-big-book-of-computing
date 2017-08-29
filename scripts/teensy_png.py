@@ -1,6 +1,6 @@
 from PIL import Image
 
-SQUARE_FACTOR = 9
+SQUARE_FACTOR = 18
 
 BLACK = (0, 0, 0)
 
@@ -18,6 +18,9 @@ SEAGREEN = (46, 139, 87)
 
 ROYALBLUE = (65, 105, 225)
 MEDIUMBLUE = (0, 0, 205)
+
+ORANGE = (255, 165, 0)
+DARKORANGE = (255, 140, 0)
 
 class Squares:
 
@@ -40,11 +43,14 @@ class Squares:
 			normal_color = LIMEGREEN
 			dark_color = LIME
 		elif color == 4:
-			normal_color = LIGHTSEAGREEN
-			dark_color = SEAGREEN
-		elif color == 5:
 			normal_color = ROYALBLUE
 			dark_color = MEDIUMBLUE
+		elif color == 5:
+			normal_color = LIGHTSEAGREEN
+			dark_color = SEAGREEN
+		elif color == 6:
+			normal_color = ORANGE
+			dark_color = DARKORANGE
 
 		x = start % self._num_x
 		y = start // self._num_x
@@ -54,8 +60,10 @@ class Squares:
 				for y_offset in range(SQUARE_FACTOR):
 					point = ((x * SQUARE_FACTOR) + x_offset,
                    (y * SQUARE_FACTOR) + y_offset)
-					if x_offset % 9 == 0 or x_offset % 9 == 8 or \
-					   y_offset % 9 == 0 or y_offset % 9 == 8:
+					if x_offset % SQUARE_FACTOR == 0 \
+					   or x_offset % SQUARE_FACTOR == (SQUARE_FACTOR - 1) \
+					   or y_offset % SQUARE_FACTOR == 0 \
+					   or y_offset % SQUARE_FACTOR == (SQUARE_FACTOR - 1):
 						self._img.putpixel(point, dark_color)
 					else:
 						self._img.putpixel(point, normal_color)
@@ -69,9 +77,10 @@ class Squares:
 		self._img.save('test.png')
 
 s = Squares(120, 120)
-s.color(0x0000, 444, 1)
-s.color(0x01BC, 312, 2)
-s.color(0x0310,  16, 3)
-s.color(0x0810,  60, 4)
-s.color(0x084C,  44, 5)
+s.color(0x0000,  444, 1)
+s.color(0x01BC,  312, 2)
+s.color(0x0310,   16, 3)
+s.color(0x0810,   60, 4)
+s.color(0x084C,   44, 5)
+s.color(0x31F0, 1540, 6)
 s.save()
