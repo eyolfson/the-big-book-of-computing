@@ -79,8 +79,8 @@ class Squares:
 				y += 1
 			remaining -= 1
 
-	def save(self):
-		self._img.save('test.png')
+	def save(self, filename):
+		self._img.save(filename)
 
 s = Squares(128, 112)
 
@@ -108,4 +108,4 @@ s.color(0x084C,   42, 4)
 s.color(0x0876,    2, 7)
 
 s.color(0x31F0, 1540, 6)
-s.save()
+s.save('blink.png')
