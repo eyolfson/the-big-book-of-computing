@@ -4,15 +4,30 @@
 % International License. You should have received a copy of the license along
 % with this work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
 
-\documentclass[10pt, draft]{book}
+\documentclass[10pt]{book}
 
+\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{fontspec}
-\usepackage[a5paper, bindingoffset=10mm, inner=20mm, outer=20mm]{geometry}
-\usepackage[newfloat]{minted}
+\usepackage{listings}
+\usepackage[
+  a5paper,
+  bindingoffset=10mm,
+  inner=20mm,
+  outer=20mm
+]{geometry}
+\usepackage[
+  backend=biber,
+  backref=true,
+  backrefstyle=none,
+  hyperref=true
+]{biblatex}
 \usepackage{tikz}
+
+\hypersetup{colorlinks=true}
+\addbibresource{references/other.bib}
 
 %% \setmainfont[Ligatures=TeX]{Tinos}
 %% \setsansfont{Arimo}[Scale=MatchLowercase]
@@ -22,7 +37,16 @@
 \definecolor{solarizedBase0}{RGB}{131, 148, 150}
 \definecolor{solarizedBlue}{RGB}{38, 139, 210}
 
-\usetikzlibrary{arrows, automata, decorations.pathreplacing, positioning}
+\usetikzlibrary{
+  arrows,
+  automata,
+  decorations.pathreplacing,
+  positioning
+}
+
+\lstset{
+  basicstyle=\ttfamily
+}
 
 \newcommand{\binary}[1]{$(\texttt{#1})_{2}$}
 \newcommand{\hexadecimal}[1]{$(\texttt{#1})_{16}$}
@@ -67,5 +91,6 @@
   \include{chapter/audio}
   \include{chapter/cryptography}
   \include{chapter/history}
+  \printbibliography
 
 \end{document}
