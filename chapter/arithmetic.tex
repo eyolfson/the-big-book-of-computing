@@ -129,7 +129,7 @@ Result is negative.
 \subsection{Example}
 
 \begin{lstlisting}
-uint8_t mean(uint8_t x_0, uint8_t x_1)
+uint8_t mean_1(uint8_t x_0, uint8_t x_1)
 {
   return (x_0 + x_1) / 2;
 }
@@ -148,7 +148,7 @@ This code is the following:
 \end{equation*}
 
 \begin{lstlisting}
-uint8_t mean(uint8_t x_0, uint8_t x_1)
+uint8_t mean_2(uint8_t x_0, uint8_t x_1)
 {
   return (x_0 / 2) + (x_1 / 2);
 }
@@ -171,3 +171,7 @@ are odd. The mod function will never not equal $a$ (or no overflow).
   + \lfloor \frac{\text{mod}(x_0, 2) + \text{mod}(x_1, 2)}{2} \rfloor
   = \lfloor \frac{x_0 + x_1}{2} \rfloor
 \end{equation*}
+
+Performance wise \texttt{mean\_2} is also 2x faster than \texttt{mean\_1}
+(why?). The correct answer \texttt{mean\_3} (TODO) is approximately the same as
+\texttt{mean\_2}.
